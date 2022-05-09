@@ -1,5 +1,6 @@
 # AkhDefo
  Computer Vision for Slope Stability
+ 
 To setup the software environment and install the required python libraries follow the below steps:
 
 ####step1 Install Anaconda for Windows
