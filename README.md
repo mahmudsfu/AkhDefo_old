@@ -1,7 +1,7 @@
 # AkhDefo
  Computer Vision for Slope Stability
  
- #Recommened Ciattion:
+ #Recommended Citation:
  
 Mahmud Muhammad*,Glyn Williams-Jones,Doug Stead,Riccardo Tortini,Giacomo Falorni,Davide Donati, 2022, Applications of Image-Based Computer Vision for Remote Surveillance of Slope Instability, Front. Earth Sci. - Geohazards and Georisks, accepted on: 17 May 2022, DOI: 10.3389/feart.2022.909078
 
