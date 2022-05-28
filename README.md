@@ -5,7 +5,7 @@
  
 Mahmud Muhammad*,Glyn Williams-Jones,Doug Stead,Riccardo Tortini,Giacomo Falorni,Davide Donati, 2022, Applications of Image-Based Computer Vision for Remote Surveillance of Slope Instability, Front. Earth Sci. - Geohazards and Georisks, accepted on: 17 May 2022, DOI: 10.3389/feart.2022.909078
 
-Background of Akh-Defo: AKh-Defo is combination of two different words 1) Akh in Kurdish language means land, earth or soil (origion of the word is from Kurdish badini dailect) 2) Defo is shor of English word deformation.
+Background of Akh-Defo: AKh-Defo is combination of two different words 1) Akh in Kurdish language means land, earth or soil (origion of the word is from Kurdish badini dailect) 2) Defo is short of English word deformation.
  
 #To setup the software environment and install the required python libraries follow the below steps:
 
