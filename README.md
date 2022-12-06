@@ -1,6 +1,13 @@
 # AkhDefo
  Computer Vision for Slope Stability
  
+ Note: Version 2 of Akhdefo will be released soon. 
+ Main Changes:
+ -The new version mainly is built on GDAL and Rasterio Libraries.
+ -Tkinter Simple GUI removed
+ -Akhdefo now can run on cloud processing
+ -Akhdefo now consist of 12 Modules that performs end to end  python-based GIS and Image Processing and Custumized Figure generation
+ 
  #Recommended Citation:
  
 Muhammad M, Williams-Jones G, Stead D, Tortini R, Falorni G and Donati D (2022) Applications of ImageBased Computer Vision for Remote
