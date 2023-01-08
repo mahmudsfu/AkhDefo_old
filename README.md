@@ -12,8 +12,13 @@ Muhammad M, Williams-Jones G, Stead D, Tortini R, Falorni G and Donati D (2022) 
 * Akhdefo now consist of 12 Modules that performs end to end python-based GIS and Image Processing and Custumized Figure generation
 
 # Usage:
-* [download anaconda environment file](akhdefov2.yml)
-* [download python package requirement text](pip_req.txt)
+* [download anaconda environment file](akhdefov2.yml) 
+
+Please visit the GITHUB homepage to download the file
+
+* [download python package requirement text](pip_req.txt) 
+
+Please visit the GITHUB homepage to download the file
 
 * Create new python Anaconda environment using the below command
 
