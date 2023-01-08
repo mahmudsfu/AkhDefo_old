@@ -17,15 +17,22 @@ Muhammad M, Williams-Jones G, Stead D, Tortini R, Falorni G and Donati D (2022) 
 
 * Create new python Anaconda environment using the below command
 
-'conda create --name akhdefov2 --file akhdefov2.yml'
+```python
+conda env create -f akhdefov2.yml
+
+```
 
 * Install required python packages using below command
 
-' pip install -r pip_req.txt'
+```python
+pip install -r pip_req.txt
+```
 
 * Now install Akhdefo using the below command
 
-'pip install -i https://test.pypi.org/simple/ akhdefo-functions==2.1.01'
+```python
+pip install -i https://test.pypi.org/simple/ akhdefo-functions
+```
 
 # User Guide
 * Under construction will be released soon!
