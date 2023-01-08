@@ -1,51 +1,91 @@
-# AkhDefo
- ## Computer Vision for Slope Stability
- 
- # Note: Version 2 of Akhdefo will be released soon. 
- ## Main Changes:
- -The new version mainly is built on GDAL and Rasterio Libraries.
- 
- -Tkinter Simple GUI removed
- 
- -Akhdefo now can run on cloud processing
- 
- -Akhdefo now consist of 12 Modules that performs end to end python-based GIS and Image Processing and Custumized Figure generation
- 
- # Recommended Citation:
- 
-Muhammad M, Williams-Jones G, Stead D, Tortini R, Falorni G and Donati D (2022) Applications of ImageBased Computer Vision for Remote
-Surveillance of Slope Instability.Front. Earth Sci. 10:909078. doi: 10.3389/feart.2022.909078
 
-# Background of Akh-Defo: 
-
+# Akhdefo: 
+# Background of Akh-Defo:
 AKh-Defo is combination of two different words 1) Akh in Kurdish language means land, earth or soil (origion of the word is from Kurdish badini dailect) 2) Defo is short of English word deformation.
+
+# Recommended Citation:
+Muhammad M, Williams-Jones G, Stead D, Tortini R, Falorni G and Donati D (2022) Applications of ImageBased Computer Vision for Remote Surveillance of Slope Instability.Front. Earth Sci. 10:909078. doi: 10.3389/feart.2022.909078
+
+# Updates:
+* Akhdefo version one is deprecated please use Akhdefo version 2.
+* Akhdefo now can run on the cloud for real-time processing
+* Akhdefo now consist of 12 Modules that performs end to end python-based GIS and Image Processing and Custumized Figure generation
+
+# Usage:
+* [download anaconda environment file](akhdefov2.yml)
+* [download python package requirement text](pip_req.txt)
+
+* Create new python Anaconda environment using the below command
+
+'conda create --name akhdefov2 --file akhdefov2.yml'
+
+* Install required python packages using below command
+
+' pip install -r pip_req.txt'
+
+* Now install Akhdefo using the below command
+
+'pip install -i https://test.pypi.org/simple/ akhdefo-functions==2.1.01'
+
+# User Guide
+* Under construction will be released soon!
+
+# Akhdefo Functions Summary
+
+##  Preprocessing functions to unzip and sort images
+
+```python
+from akhdefo_functions import copyImage_Data, copyUDM2_Mask_Data , unzip
+```
+
+##   Import Module to mosaic and crop raster to Area of Interest using shapefile
+
+```python
+from akhdefo_functions import Mosaic, Crop_to_AOI
+```
+
+##  Import Module to filter rasters
+
+```python
+from akhdefo_functions import Filter_PreProcess
+```
+
+## Import Module to calculate triplet raster velocities
+
+```python
+ from akhdefo_functions import DynamicChangeDetection
  
-#To setup the software environment and install the required python libraries follow the below steps:
+ ```
 
-## step1 Install Anaconda for Windows
+##  Import Modules for plotting
 
-https://www.anaconda.com/products/individual?modal=commercial
+```python
+from akhdefo_functions import akhdefo_viewer
+from akhdefo_functions import plot_stackNetwork
+from akhdefo_functions import Akhdefo_resample
+from akhdefo_functions import Akhdefo_inversion
+```
 
-## step 2 Create new Anaconda environment called akhdefo using the below command. 
+##  Import Module to process stacked triplet velocities and collect velocity candidate points
 
-Please copy the akh-defo.txt and akhdeforequirements.txt files and paste them at C:\Users\your windows username folder  then run the following command
+```python
+from akhdefo_functions import stackprep'
+```
+##  Python module to coregister satallite images
 
-conda create --name akhdefo --file akh-defo.txt
+```python
+from akhdefo_functions  import  Coregistration
+```
 
-## Step 3 Activate the newly created anaconda environment using the below command
+##  python module to process and calculate timestamp linear deformation rates
 
-conda activate akhdefo
+```python
+from akhdefo_functions import  Time_Series
+```
 
-## step 4 run the below command to install the remaining required python libraries.
+##  python module to plot timeseries profile for selected points
 
-pip install -r akhdeforequirements.txt
+```python
+from  akhdefo_functions import  akhdefo_ts_plot
 
-Congrats Now your python environment ready to run the Akh-Defo software
-
-Optional Step: its highly recommned to install Visual studio code to run Akh-Defo software, Although you can run the software on any python IDE as long as you choose the akhdefo conda environment as python interpreter 
-
-If you use jupyter notebook or JupyterLab make sure you have also installed ipython and ipkerenel 
-
-
-
-
+```
