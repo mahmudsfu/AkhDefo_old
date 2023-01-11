@@ -2,7 +2,6 @@
 .. autosummary::
    :toctree: generated
 
-   akhdefo_functions
 
    akhdefo_functions.unzip
 
