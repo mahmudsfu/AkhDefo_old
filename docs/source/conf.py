@@ -11,17 +11,15 @@ copyright = '2023, Mahmud Mustafa Muhammad'
 author = 'Mahmud Mustafa Muhammad'
 release = '2023'
 
-
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.duration',
-   'sphinx.ext.doctest',
-   'sphinx.ext.autodoc',
-   'sphinx.ext.autosummary',]
+extensions = ["myst_parser", 'sphinx.ext.autodoc', 'sphinx.ext.duration',
+    'sphinx.ext.doctest',
+    'sphinx.ext.autosummary']
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
 
