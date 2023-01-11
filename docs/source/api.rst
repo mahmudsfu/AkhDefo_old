@@ -1,8 +1,7 @@
-
 .. autosummary::
    :toctree: generated
 
-
+   akhdefo_functions
    akhdefo_functions.unzip
 
    akhdefo_functions.copyImage_Data
@@ -36,7 +35,3 @@
    akhdefo_functions.Akhdefo_inversion
 
    akhdefo_functions.utm_to_latlon
-
-   
-
-   
