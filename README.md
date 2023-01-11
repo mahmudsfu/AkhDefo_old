@@ -44,6 +44,8 @@ pip install -i https://test.pypi.org/simple/ akhdefo-functions
 
 # Akhdefo Functions Summary
 
+[summary](index.html)
+
 ##  Preprocessing functions to unzip and sort images
 
 ```python
@@ -62,7 +64,7 @@ from akhdefo_functions import Mosaic, Crop_to_AOI
 from akhdefo_functions import Filter_PreProcess
 
 ```
-[click to see documentation](https://github.com/mahmudsfu/AkhDefo/blob/master/Filter_PreProcess.html)
+
 
 ## Import Module to calculate triplet raster velocities
 
