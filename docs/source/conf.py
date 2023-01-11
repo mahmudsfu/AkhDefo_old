@@ -14,7 +14,7 @@ release = '2023'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser", 'sphinx.ext.autodoc', 'sphinx.ext.duration',
+extensions = [ 'sphinx.ext.autodoc', 'sphinx.ext.duration',
     'sphinx.ext.doctest',
     'sphinx.ext.autosummary']
 
