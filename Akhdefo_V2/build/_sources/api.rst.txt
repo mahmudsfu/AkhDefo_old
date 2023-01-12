@@ -1,7 +1,7 @@
 .. autosummary::
    :toctree: generated
 
-   akhdefo_functions
+   
    akhdefo_functions.unzip
    akhdefo_functions.copyImage_Data
    akhdefo_functions.copyUDM2_Mask_Data
