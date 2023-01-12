@@ -21,7 +21,7 @@ release = '2023'
 extensions = ['sphinx.ext.duration',
    'sphinx.ext.doctest',
    'sphinx.ext.autodoc',
-   'sphinx.ext.autosummary','rst2pdf.pdfbuilder', 'sphinx.ext.intersphinx',]
+   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx',]
 
  
 pdf_documents = [('index', u'usage'),]
