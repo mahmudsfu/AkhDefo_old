@@ -9,7 +9,7 @@
 .. autofunction:: akhdefo_functions.Mosaic
 .. autofunction:: akhdefo_functions.Coregistration
 .. autofunction:: akhdefo_functions.DynamicChangeDetection
-.. autofunction:: autofunction:: akhdefo_functions.plot_stackNetwork
+.. autofunction:: akhdefo_functions.plot_stackNetwork
 .. autofunction::akhdefo_functions.stackprep
 .. autofunction:: akhdefo_functions.Time_Series
 .. autofunction:: akhdefo_functions.akhdefo_ts_plot
