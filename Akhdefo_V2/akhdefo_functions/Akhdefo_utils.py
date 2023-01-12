@@ -1,8 +1,8 @@
 
 def Akhdefo_resample(input_raster="", output_raster="" , xres=3.125 , yres=3.125, SavFig=False , convert_units=False):
-     """
+    """
     This program performs raster resampling for multiple rasters
-    ======================================================
+   
     Inputs:
 
     input_raster="", 
@@ -17,7 +17,7 @@ def Akhdefo_resample(input_raster="", output_raster="" , xres=3.125 , yres=3.125
     SavFig=False
 
     convert_units=False if True converts raster value units from m to mm
-    ==================
+    
     Returns:
     Raster geotif
 
@@ -28,14 +28,12 @@ def Akhdefo_resample(input_raster="", output_raster="" , xres=3.125 , yres=3.125
     import seaborn_image as sb
     import rasterio
     import os
-
-  
+   
     ds = gdal.Open(input_raster)
 
     # resample
     dsRes = gdal.Warp(output_raster, ds, xRes = xres, yRes = yres, 
                     resampleAlg = "bilinear")
-
     
     dsRes =None 
     ds = None
@@ -66,7 +64,7 @@ def Akhdefo_resample(input_raster="", output_raster="" , xres=3.125 , yres=3.125
 def Akhdefo_inversion(horizontal_InSAR="", Vertical_InSAR="", EW_Akhdefo="", NS_Akhdefo="", demFile="", output_folder=r""):
     """
     This program calculates 3D displacement velocity (East-West,North-South and vertical) using combined optical and InSAR products
-    ========================================
+   
     Inputs:
 
     horizontal_InSAR: path to East Velocity InSAR product in geotif format
@@ -81,7 +79,7 @@ def Akhdefo_inversion(horizontal_InSAR="", Vertical_InSAR="", EW_Akhdefo="", NS_
 
     output_folder: path to save raster products 
 
-    ===========================
+    
     Returns:
 
     3D-Velocity (D3D in mm/year) raster
@@ -95,6 +93,7 @@ def Akhdefo_inversion(horizontal_InSAR="", Vertical_InSAR="", EW_Akhdefo="", NS_
     import numpy as np
     import os
     import cmocean
+    from akhdefo_functions.AkhdefoPlot import akhdefo_viewer
     
     
     if not os.path.exists(output_folder ):

@@ -8,7 +8,7 @@ def Mosaic(Path_to_WorkingDir=r"", output_MosaicDir=r"" , img_mode=(0,1)):
     This program mosiacs raster images in geotif format as well grab dates the satellite image taken for further processing. 
 
     The current version only supports Planet Labs SurfaceReflectance products.
-    ==========================================================================
+    
 
     Path_to_WorkingDir=r""
 
@@ -94,7 +94,7 @@ def Mosaic(Path_to_WorkingDir=r"", output_MosaicDir=r"" , img_mode=(0,1)):
 def rasterClip(rasterpath, aoi, outfilename):
     """
     This program used to clip single raster file
-    =======================================
+    
 
     rasterpath: path to raster file in geotif format
 
@@ -118,9 +118,9 @@ def rasterClip(rasterpath, aoi, outfilename):
 
 def Crop_to_AOI(Path_to_WorkingDir=r'', Path_to_AOI_shapefile=r"", output_CroppedDir=r"" ):
 
-     """
+    """
     This program used to clip multiple  raster files
-    =======================================
+   
 
     Path_to_WorkingDir: path to raster working directory 
 

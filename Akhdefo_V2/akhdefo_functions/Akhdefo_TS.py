@@ -7,7 +7,7 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
     This program uses candiate velocity points from stackprep function and performs linear interpolation in time-domain to calibrate
     stacked velocity. Additionally produces corrected timeseries velocity(daily) in a shapefile.
     Inputs:
-    =============================
+    
     stacked_raster_EW:
     
     stacked_raster_NS:
@@ -19,7 +19,7 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
     output_folder:
     
     outputFilename
-    ==========================
+    
     
     Returns:
     

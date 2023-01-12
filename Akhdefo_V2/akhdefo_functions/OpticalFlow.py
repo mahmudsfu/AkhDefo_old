@@ -7,7 +7,7 @@ def DynamicChangeDetection(Path_working_Directory=r"" , Path_UDM2_folder=r"",
 
     """
     This program calculates optical flow velocity from triplets of daily optical satellite images.
-    =========================
+    
 
     Path_working_Directory=r""  
 
@@ -31,12 +31,12 @@ def DynamicChangeDetection(Path_working_Directory=r"" , Path_UDM2_folder=r"",
 
     plot_option="origional"
 
-===================================
+
     Outputs:
     Raster velocity in X direction(EW)
     Raster Velocity in Y direction(NS)
     Initial Timesereis Figures (those figures are only intermediate products needs calibration)
-    =================================================
+    
     Note:
     Final Timeseris products will be a shapefile format using Time_Series function after stackprep step.
 

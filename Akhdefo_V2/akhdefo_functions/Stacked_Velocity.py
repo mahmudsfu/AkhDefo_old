@@ -9,7 +9,7 @@ VEL_scale=("month","year") , xres=3.125, yres=3.125, Velocity_shapeFile=False, R
     
     '''
     This program collects velocity candiate points for time-series analysis
-    =======================================================================
+    
     path_to_flowxnFolder=r"" path to folder include east-west velocity files
     
     path_toFlowynFolder=r"" path to folder include north-south velocity files

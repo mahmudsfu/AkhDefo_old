@@ -5,7 +5,7 @@ def unzip(zipdir, dst_dir ):
 
     """
     This program unzips all the zip products into one folder
-    =========================================================
+   
 
     zipdir: path to directory contains all the zipfiles
 

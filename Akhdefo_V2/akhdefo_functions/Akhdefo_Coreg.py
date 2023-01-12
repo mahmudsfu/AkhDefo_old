@@ -4,7 +4,7 @@ def Coregistration(input_Folder=r"", output_folder=r"", grid_res=20, min_reliabi
     This program coregisteres multiple rasters using both structural similarity index and feature matching techniqws. This program is written based on arosics python library
 
     Inputs
-    ========================
+   
     input_Folder: str
     Path to input raster folders
  
@@ -28,7 +28,7 @@ def Coregistration(input_Folder=r"", output_folder=r"", grid_res=20, min_reliabi
     single_ref_path: str
 
     provide path to raster if interested to coregister all rasters to a single reference, ignore this option the program uses subsequent rasters as refernce. 
-    ==============================
+    
 
     Returns:
 

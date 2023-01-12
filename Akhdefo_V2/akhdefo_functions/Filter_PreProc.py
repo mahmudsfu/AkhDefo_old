@@ -5,7 +5,7 @@ def Filter_PreProcess(unfiltered_folderPath=r"", UDM2_maskfolderPath=r"", outpat
 
     """
     This program prepare and uses filters to balanace raster image brightness
-    ==========================================
+    
     unfiltered_folderPath=r""
 
     UDM2_maskfolderPath=r""
