@@ -36,15 +36,13 @@ pip install -r pip_req.txt
 * Now install Akhdefo using the below command
 
 ```python
-pip install -i https://test.pypi.org/simple/ akhdefo-functions
+pip install akhdefo-functions
 ```
 
 # User Guide
 * Under construction will be released soon!
 
 # Akhdefo Functions Summary
-
-[summary](index.html)
 
 ##  Preprocessing functions to unzip and sort images
 
@@ -62,9 +60,7 @@ from akhdefo_functions import Mosaic, Crop_to_AOI
 
 ```python
 from akhdefo_functions import Filter_PreProcess
-
 ```
-
 
 ## Import Module to calculate triplet raster velocities
 
