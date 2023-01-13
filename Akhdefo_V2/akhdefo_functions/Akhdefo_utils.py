@@ -1,24 +1,32 @@
 
 def Akhdefo_resample(input_raster="", output_raster="" , xres=3.125 , yres=3.125, SavFig=False , convert_units=False):
     """
-    This program performs raster resampling for multiple rasters
+    This program performs raster resampling for  rasters
    
-    Inputs:
+    Parameters
+    ----------
 
-    input_raster="", 
+    input_raster : str
+        path to input raster
 
-    output_raster="" , 
+    output_raster : str
+        path to output raster
 
 
-    xres=3.125 , 
+    xres : float
+        horizontal resolution
 
-    yres=3.125, 
+    yres : float 
+        vertical resolution
 
-    SavFig=False
+    SavFig : bool
+        True to save output plot False to ignore exporting plot
 
-    convert_units=False if True converts raster value units from m to mm
+    convert_units : bool 
+        if True converts raster value units from m to mm
     
-    Returns:
+    Returns
+    -------
     Raster geotif
 
     """
@@ -65,26 +73,34 @@ def Akhdefo_inversion(horizontal_InSAR="", Vertical_InSAR="", EW_Akhdefo="", NS_
     """
     This program calculates 3D displacement velocity (East-West,North-South and vertical) using combined optical and InSAR products
    
-    Inputs:
+    Parameters
+    ----------
 
-    horizontal_InSAR: path to East Velocity InSAR product in geotif format
+    horizontal_InSAR : str
+        path to East Velocity InSAR product in geotif format
 
-    Vertical_InSAR: path to Vertical Velocity InSAR product in geotif format
+    Vertical_InSAR : str
+        path to Vertical Velocity InSAR product in geotif format
 
-    EW_Akhdefo: path to east-west velocity  akhdefo(optical) product in geotif format
+    EW_Akhdefo : str 
+        path to east-west velocity  akhdefo(optical) product in geotif format
 
-    NS_Akhdefo: path to north-south velocity  akhdefo(optical) product in geotif format
+    NS_Akhdefo : str
+        path to north-south velocity  akhdefo(optical) product in geotif format
 
-    demFile: path to DEM raster in geotif format
+    demFile : str
+        path to DEM raster in geotif format
 
-    output_folder: path to save raster products 
+    output_folder : str
+        path to save raster products 
 
     
-    Returns:
-
-    3D-Velocity (D3D in mm/year) raster
-    Plunge raster in degrees
-    Trend raster in degress
+    Returns
+    -------
+    Three geotif rasters
+        3D-Velocity (D3D in mm/year) raster
+        Plunge raster in degrees
+        Trend raster in degress
 
 
     """
@@ -161,10 +177,23 @@ def Akhdefo_inversion(horizontal_InSAR="", Vertical_InSAR="", EW_Akhdefo="", NS_
 
 def Auto_Variogram(path_to_shapefile=r"", column_attribute="", latlon=False):  
     '''
-    path_to_shapefile: type path to shapefile to include data (point data)
+    This program automatically selects best variogram model which later 
+    can be used to interpolate datapoints.
+    
+    Parameters
+    ----------
+    path_to_shapefile : str 
+    type path to shapefile to include data (point data)
     the shapefile attribute must have x, y or lat, lon columns
     
-    column_attribute: Name of shapefile field attribute include data
+    column_attribute : str
+        Name of shapefile field attribute include data
+
+    Returns
+    -------
+    str
+        name of best variogram model
+        also figure for plotted variogram models
     
     '''
     import numpy as np

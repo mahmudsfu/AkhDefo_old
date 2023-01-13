@@ -2,21 +2,26 @@
 
 
 
-def Mosaic(Path_to_WorkingDir=r"", output_MosaicDir=r"" , img_mode=(0,1)):
+def Mosaic(Path_to_WorkingDir=r"", output_MosaicDir=r"" , img_mode=0):
 
     """
     This program mosiacs raster images in geotif format as well grab dates the satellite image taken for further processing. 
-
     The current version only supports Planet Labs SurfaceReflectance products.
-    
 
-    Path_to_WorkingDir=r""
+    Parameters
+    ----------
 
-    output_MosaicDir=r"" 
+    Path_to_WorkingDir : str
 
-    img_mode=(0,1) if img_mode=0 the the programs mosaics only the raster images. 
+    output_MosaicDir : str
 
-    if img_mode=1 the program mosiacs only mask rasters
+    img_mode : int
+         if img_mode=0 the the programs mosaics only the raster images. 
+         if img_mode=1 the program mosiacs only mask rasters
+
+    Returns
+    -------
+    Mosaiced raster images
 
     """
     import glob
@@ -93,14 +98,22 @@ def Mosaic(Path_to_WorkingDir=r"", output_MosaicDir=r"" , img_mode=(0,1)):
 
 def rasterClip(rasterpath, aoi, outfilename):
     """
-    This program used to clip single raster file
+    This program used to clip single raster file.
     
+    Parameters
+    ----------
+    rasterpath : str
+        path to raster file in geotif format
 
-    rasterpath: path to raster file in geotif format
+    aoi : str
+        path to Area of interest in shapefile format
 
-    aoi: path to Area of interest in shapefile format
+    outfilename : str
+        path to output raster file in geotif format ".tif"
 
-    outfilename: path to output raster file in geotif format ".tif"
+    Returns
+    -------
+    clipped raster
 
     """
     import geopandas as gpd
@@ -120,13 +133,22 @@ def Crop_to_AOI(Path_to_WorkingDir=r'', Path_to_AOI_shapefile=r"", output_Croppe
 
     """
     This program used to clip multiple  raster files
-   
 
-    Path_to_WorkingDir: path to raster working directory 
+    Parameters
+    ----------
 
-    Path_to_AOI_shapefile: path to Area of interest in shapefile format
+    Path_to_WorkingDir : str
+        path to raster working directory 
 
-    output_CroppedDir: path to save cropped raster files
+    Path_to_AOI_shapefile : str
+        path to Area of interest in shapefile format
+
+    output_CroppedDir : str 
+        path to save cropped raster files
+
+    Returns
+    -------
+    cropped raster files
 
     """
     import os 

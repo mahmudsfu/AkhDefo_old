@@ -2,7 +2,8 @@ def utm_to_latlon(easting, northing, zone_number, zone_letter):
     '''
     This program converts geographic projection of shapefiles from UTM to LATLONG
     
-    Inputs:
+    Parameters
+    ----------
     easting: Geopandas column with Easting 
     
     northing: Geopandas column with Northing
@@ -11,7 +12,8 @@ def utm_to_latlon(easting, northing, zone_number, zone_letter):
     
     zone_letter: "N" or "S"
     
-    Returns:
+    Returns
+    -------
     [lon , lat ]: List
 
     '''
@@ -23,235 +25,235 @@ def utm_to_latlon(easting, northing, zone_number, zone_letter):
     
     return [lon, lat]
 
-def ts_plot(df, plot_number, save_plot=False , output_dir="", plot_filename="" , VEL_Scale='year'):
+# def ts_plot(df, plot_number, save_plot=False , output_dir="", plot_filename="" , VEL_Scale='year'):
 
 
-    import plotly.graph_objects as go
-    import plotly.express as px
-    import plotly.express as px_temp
-    import pandas as pd
-    import numpy as np
-    import matplotlib.pyplot as plt
-    import geopandas as gpd 
-    import pandas as pd  
-    import seaborn as sns  
-    import plotly.offline as py_offline
-    import os   
-    import statsmodels.api as sm
-    from sklearn.metrics import mean_squared_error, r2_score
-    import numpy as np
-    from sklearn.linear_model import LinearRegression
-    from datetime import datetime
-    import math
+#     import plotly.graph_objects as go
+#     import plotly.express as px
+#     import plotly.express as px_temp
+#     import pandas as pd
+#     import numpy as np
+#     import matplotlib.pyplot as plt
+#     import geopandas as gpd 
+#     import pandas as pd  
+#     import seaborn as sns  
+#     import plotly.offline as py_offline
+#     import os   
+#     import statsmodels.api as sm
+#     from sklearn.metrics import mean_squared_error, r2_score
+#     import numpy as np
+#     from sklearn.linear_model import LinearRegression
+#     from datetime import datetime
+#     import math
     
-    py_offline.init_notebook_mode()
-    #%matplotlib widget
-    #df=pd.read_csv("temp.csv")
-    df.rename(columns={ df.columns[0]: "dd" }, inplace = True)
-    df['dd_str']=df['dd'].astype(str)
-    df['dd_str'] = df['dd_str'].astype(str)
-    df.rename(columns={ df.columns[1]: "val" }, inplace = True)
-    df['dd']= pd.to_datetime(df['dd'].astype(str), format='%Y%m%d')
+#     py_offline.init_notebook_mode()
+#     #%matplotlib widget
+#     #df=pd.read_csv("temp.csv")
+#     df.rename(columns={ df.columns[0]: "dd" }, inplace = True)
+#     df['dd_str']=df['dd'].astype(str)
+#     df['dd_str'] = df['dd_str'].astype(str)
+#     df.rename(columns={ df.columns[1]: "val" }, inplace = True)
+#     df['dd']= pd.to_datetime(df['dd'].astype(str), format='%Y%m%d')
     
-    df=df.set_index('dd')
+#     df=df.set_index('dd')
     
-    ########################
-    df=df.dropna()
-    # Make index pd.DatetimeIndex
-    df.index = pd.DatetimeIndex(df.index)
-    # Make new index
-    idx = pd.date_range(df.index.min(), df.index.max())
-    # Replace original index with idx
-    df = df.reindex(index = idx)
-    # Insert row count
-    df.insert(df.shape[1],
-            'row_count',
-            df.index.value_counts().sort_index().cumsum())
+#     ########################
+#     df=df.dropna()
+#     # Make index pd.DatetimeIndex
+#     df.index = pd.DatetimeIndex(df.index)
+#     # Make new index
+#     idx = pd.date_range(df.index.min(), df.index.max())
+#     # Replace original index with idx
+#     df = df.reindex(index = idx)
+#     # Insert row count
+#     df.insert(df.shape[1],
+#             'row_count',
+#             df.index.value_counts().sort_index().cumsum())
 
-    df=df.dropna()
+#     df=df.dropna()
     
-    #df=df.set_index(df['row_count'], inplace=True)
+#     #df=df.set_index(df['row_count'], inplace=True)
 
-    df.sort_index(ascending=True, inplace=True)
+#     df.sort_index(ascending=True, inplace=True)
     
 
-    def best_fit_slope_and_intercept(xs,ys):
-        from statistics import mean
-        xs = np.array(xs, dtype=np.float64)
-        ys = np.array(ys, dtype=np.float64)
-        m = (((mean(xs)*mean(ys)) - mean(xs*ys)) /
-            ((mean(xs)*mean(xs)) - mean(xs*xs)))
+#     def best_fit_slope_and_intercept(xs,ys):
+#         from statistics import mean
+#         xs = np.array(xs, dtype=np.float64)
+#         ys = np.array(ys, dtype=np.float64)
+#         m = (((mean(xs)*mean(ys)) - mean(xs*ys)) /
+#             ((mean(xs)*mean(xs)) - mean(xs*xs)))
         
-        b = mean(ys) - m*mean(xs)
+#         b = mean(ys) - m*mean(xs)
         
-        return m, b
+#         return m, b
 
     
 
-    #convert dattime to number of days per year
+#     #convert dattime to number of days per year
     
     
     
 
-    dates_list=([datetime.strptime(x, '%Y%m%d') for x in df.dd_str])
-    days_num=[( ((x) - (pd.Timestamp(year=x.year, month=1, day=1))).days + 1) for x in dates_list]
-    time2=days_num[len(days_num)-1]
-    time1=days_num[0]
-    delta=time2-time1
-    delta=float(delta)
-    print(days_num, delta)
+#     dates_list=([datetime.strptime(x, '%Y%m%d') for x in df.dd_str])
+#     days_num=[( ((x) - (pd.Timestamp(year=x.year, month=1, day=1))).days + 1) for x in dates_list]
+#     time2=days_num[len(days_num)-1]
+#     time1=days_num[0]
+#     delta=time2-time1
+#     delta=float(delta)
+#     print(days_num, delta)
     
-    m, b = best_fit_slope_and_intercept(df.row_count, df.val)
-    print("m:", math.ceil(m*100)/100, "b:",math.ceil(b*100)/100)
-    regression_model = LinearRegression()
-    val_dates_res = regression_model.fit(np.array(days_num).reshape(-1,1), np.array(df.val))
-    y_predicted = regression_model.predict(np.array(days_num).reshape(-1,1))
+#     m, b = best_fit_slope_and_intercept(df.row_count, df.val)
+#     print("m:", math.ceil(m*100)/100, "b:",math.ceil(b*100)/100)
+#     regression_model = LinearRegression()
+#     val_dates_res = regression_model.fit(np.array(days_num).reshape(-1,1), np.array(df.val))
+#     y_predicted = regression_model.predict(np.array(days_num).reshape(-1,1))
     
-    if VEL_Scale=='year':
-        rate_change=regression_model.coef_[0]/delta * 365.0
-    elif VEL_Scale=='month':
-        rate_change=regression_model.coef_[0]/delta * 30
+#     if VEL_Scale=='year':
+#         rate_change=regression_model.coef_[0]/delta * 365.0
+#     elif VEL_Scale=='month':
+#         rate_change=regression_model.coef_[0]/delta * 30
         
-    # model evaluation
-    mse=mean_squared_error(np.array(df.val),y_predicted)
-    rmse = np.sqrt(mean_squared_error(np.array(df.val), y_predicted))
-    r2 = r2_score(np.array(df.val), y_predicted)
+#     # model evaluation
+#     mse=mean_squared_error(np.array(df.val),y_predicted)
+#     rmse = np.sqrt(mean_squared_error(np.array(df.val), y_predicted))
+#     r2 = r2_score(np.array(df.val), y_predicted)
     
-    # printing values
-    print('Slope(linear deformation rate):' + str(math.ceil(regression_model.coef_[0]*100)/100/delta) + " mm/day")
-    print('Intercept:', math.ceil(b*100)/100)
-    #print('MSE:',mse)
-    print('Root mean squared error: ', math.ceil(rmse*100)/100)
-    print('R2 score: ', r2)
-    print("STD: ",math.ceil(np.std(y_predicted)*100)/100) 
-    # Create figure
-    #fig = go.Figure()
+#     # printing values
+#     print('Slope(linear deformation rate):' + str(math.ceil(regression_model.coef_[0]*100)/100/delta) + " mm/day")
+#     print('Intercept:', math.ceil(b*100)/100)
+#     #print('MSE:',mse)
+#     print('Root mean squared error: ', math.ceil(rmse*100)/100)
+#     print('R2 score: ', r2)
+#     print("STD: ",math.ceil(np.std(y_predicted)*100)/100) 
+#     # Create figure
+#     #fig = go.Figure()
     
-    fig = go.FigureWidget()
+#     fig = go.FigureWidget()
     
-    plot_number="Plot Number:"+str(plot_number)
+#     plot_number="Plot Number:"+str(plot_number)
 
-    fig.add_trace(go.Scatter(x=list(df.index), y=list(df.val)))
-    fig = px.scatter(df, x=list(df.index), y=list(df.val),
-                color="val", hover_name="val"
-                    , labels=dict(x="Dates", y="mm/"+VEL_Scale , color="mm/"+VEL_Scale))
+#     fig.add_trace(go.Scatter(x=list(df.index), y=list(df.val)))
+#     fig = px.scatter(df, x=list(df.index), y=list(df.val),
+#                 color="val", hover_name="val"
+#                     , labels=dict(x="Dates", y="mm/"+VEL_Scale , color="mm/"+VEL_Scale))
     
-    # fig.add_trace(
-    # go.Scatter(x=list(df.index), y=list(val_fit), mode = "lines",name="trendline", marker_color = "red"))
+#     # fig.add_trace(
+#     # go.Scatter(x=list(df.index), y=list(val_fit), mode = "lines",name="trendline", marker_color = "red"))
     
     
     
-    fig.add_trace(go.Scatter(x=list(df.index), y=list(df.val),mode = 'lines',
-                            name = 'draw lines', line = dict(shape = 'linear', color = 'rgb(0, 0, 0)', dash = 'dash'), connectgaps = True))
+#     fig.add_trace(go.Scatter(x=list(df.index), y=list(df.val),mode = 'lines',
+#                             name = 'draw lines', line = dict(shape = 'linear', color = 'rgb(0, 0, 0)', dash = 'dash'), connectgaps = True))
     
-    fig.add_trace(
-        go.Scatter(x=list(df.index), y=list(y_predicted), mode = "lines",name="trendline", marker_color = "black", line_color='red'))
+#     fig.add_trace(
+#         go.Scatter(x=list(df.index), y=list(y_predicted), mode = "lines",name="trendline", marker_color = "black", line_color='red'))
     
     
 
-    # Add range slider
-    fig.update_layout(
-        xaxis=dict(
-            rangeselector=dict(
-                buttons=list([
-                    dict(count=1,
-                        label="1m",
-                        step="month",
-                        stepmode="backward"),
-                    dict(count=6,
-                        label="6m",
-                        step="month",
-                        stepmode="backward"),
-                    dict(count=1,
-                        label="YTD",
-                        step="year",
-                        stepmode="todate"),
-                    dict(count=1,
-                        label="1y",
-                        step="year",
-                        stepmode="backward"),
-                    dict(step="all")
-                ])
-            ),
-            rangeslider=dict(
-                visible=True
-            ),
-            type="date"
-        ) 
-    )
-    fig.update_xaxes(rangeslider_thickness = 0.05)
-    #fig.update_layout(showlegend=True)
+#     # Add range slider
+#     fig.update_layout(
+#         xaxis=dict(
+#             rangeselector=dict(
+#                 buttons=list([
+#                     dict(count=1,
+#                         label="1m",
+#                         step="month",
+#                         stepmode="backward"),
+#                     dict(count=6,
+#                         label="6m",
+#                         step="month",
+#                         stepmode="backward"),
+#                     dict(count=1,
+#                         label="YTD",
+#                         step="year",
+#                         stepmode="todate"),
+#                     dict(count=1,
+#                         label="1y",
+#                         step="year",
+#                         stepmode="backward"),
+#                     dict(step="all")
+#                 ])
+#             ),
+#             rangeslider=dict(
+#                 visible=True
+#             ),
+#             type="date"
+#         ) 
+#     )
+#     fig.update_xaxes(rangeslider_thickness = 0.05)
+#     #fig.update_layout(showlegend=True)
 
-    #fig.data[0].update(line_color='black')
-    tt= "Defo-Rate:"+str(round(rate_change,2))+":"+ "Defo-Rate-STD:"+str(round(np.std(y_predicted), 2))+ ":" +plot_number
+#     #fig.data[0].update(line_color='black')
+#     tt= "Defo-Rate:"+str(round(rate_change,2))+":"+ "Defo-Rate-STD:"+str(round(np.std(y_predicted), 2))+ ":" +plot_number
     
-    # make space for explanation / annotation
-    fig.update_layout(margin=dict(l=20, r=20, t=20, b=60),paper_bgcolor="LightSteelBlue")
+#     # make space for explanation / annotation
+#     fig.update_layout(margin=dict(l=20, r=20, t=20, b=60),paper_bgcolor="LightSteelBlue")
 
     
-    fig.update_layout(
+#     fig.update_layout(
         
-    title_text=tt, title_font_family="Sitka Small",
-    title_font_color="red", title_x=0.5 , legend_title="Legend",
-    font=dict(
-        family="Courier New, monospace",
-        size=15,
-        color="RebeccaPurple" ))
+#     title_text=tt, title_font_family="Sitka Small",
+#     title_font_color="red", title_x=0.5 , legend_title="Legend",
+#     font=dict(
+#         family="Courier New, monospace",
+#         size=15,
+#         color="RebeccaPurple" ))
     
-    fig.update_layout(legend=dict(
-    yanchor="top",
-    y=-0,
-    xanchor="left",
-    x=1.01
-))
+#     fig.update_layout(legend=dict(
+#     yanchor="top",
+#     y=-0,
+#     xanchor="left",
+#     x=1.01
+# ))
 
-    # fig.update_layout(
-    # updatemenus=[
-    #     dict(
-    #         type="buttons",
-    #         direction="right",
-    #         active=0,
-    #         x=0.57,
-    #         y=1.2,
-    #         buttons=list([
-    #             dict(
-    #                 args=["colorscale", "Viridis"],
-    #                 label="Viridis",
-    #                 method="restyle"
-    #             ),
-    #             dict(
-    #                 args=["colorscale", "turbo"],
-    #                 label="turbo",
-    #                 method="restyle"
-    #             )
-    #         ]),
-    #     )
-    # ])
-
-    
-    fig.update_xaxes(showspikes=True, spikemode='toaxis' , spikesnap='cursor', spikedash='dot', spikecolor='blue', scaleanchor='y', title_font_family="Arial", 
-                    title_font=dict(size=15))
-    fig.update_yaxes(showspikes=True, spikemode='toaxis' , spikesnap='cursor', spikedash='dot', spikecolor='blue', scaleanchor='x', title_font_family="Arial",
-                    title_font=dict(size=15))
+#     # fig.update_layout(
+#     # updatemenus=[
+#     #     dict(
+#     #         type="buttons",
+#     #         direction="right",
+#     #         active=0,
+#     #         x=0.57,
+#     #         y=1.2,
+#     #         buttons=list([
+#     #             dict(
+#     #                 args=["colorscale", "Viridis"],
+#     #                 label="Viridis",
+#     #                 method="restyle"
+#     #             ),
+#     #             dict(
+#     #                 args=["colorscale", "turbo"],
+#     #                 label="turbo",
+#     #                 method="restyle"
+#     #             )
+#     #         ]),
+#     #     )
+#     # ])
 
     
-    
-    if save_plot==True:
-    
-        if not os.path.exists(output_dir):
-            os.mkdir(output_dir)
+#     fig.update_xaxes(showspikes=True, spikemode='toaxis' , spikesnap='cursor', spikedash='dot', spikecolor='blue', scaleanchor='y', title_font_family="Arial", 
+#                     title_font=dict(size=15))
+#     fig.update_yaxes(showspikes=True, spikemode='toaxis' , spikesnap='cursor', spikedash='dot', spikecolor='blue', scaleanchor='x', title_font_family="Arial",
+#                     title_font=dict(size=15))
 
-        fig.write_html(output_dir + "/" + plot_filename + ".html" )
-        fig.write_image(output_dir + "/" + plot_filename + ".jpeg", scale=1, width=1080, height=300 )
+    
+    
+#     if save_plot==True:
+    
+#         if not os.path.exists(output_dir):
+#             os.mkdir(output_dir)
+
+#         fig.write_html(output_dir + "/" + plot_filename + ".html" )
+#         fig.write_image(output_dir + "/" + plot_filename + ".jpeg", scale=1, width=1080, height=300 )
         
     
-    def zoom(layout, xrange):
-        in_view = df.loc[fig.layout.xaxis.range[0]:fig.layout.xaxis.range[1]]
-        fig.layout.yaxis.range = [in_view.High.min() - 10, in_view.High.max() + 10]
+#     def zoom(layout, xrange):
+#         in_view = df.loc[fig.layout.xaxis.range[0]:fig.layout.xaxis.range[1]]
+#         fig.layout.yaxis.range = [in_view.High.min() - 10, in_view.High.max() + 10]
 
-    fig.layout.on_change(zoom, 'xaxis.range')
+#     fig.layout.on_change(zoom, 'xaxis.range')
     
-    fig.show()
+#     fig.show()
     
     
 

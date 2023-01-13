@@ -3,25 +3,29 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
                 rasteriz_mean_products=True, std=1, VEL_Scale='year'):
     
     '''
-
     This program uses candiate velocity points from stackprep function and performs linear interpolation in time-domain to calibrate
     stacked velocity. Additionally produces corrected timeseries velocity(daily) in a shapefile.
-    Inputs:
     
-    stacked_raster_EW:
+    Parameters
+    ----------
     
-    stacked_raster_NS:
+    stacked_raster_EW : str
     
-    velocity_points: Velcity Candidate points
+    stacked_raster_NS : str
     
-    dates_name:text file include name of each date in format YYYYMMDD
+    velocity_points : str 
+        Velcity Candidate points
     
-    output_folder:
+    dates_name : str
+        text file include name of each date in format YYYYMMDD
     
-    outputFilename
+    output_folder : str
+    
+    outputFilename : str
     
     
-    Returns:
+    Returns
+    -------
     
     Time-series shape file of velocity and direction EW, NS, and 2D(resultant Velocity and direction)
     
@@ -240,7 +244,7 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
         geo_out.to_file(output_folder +"/" + outputFilename)
         (geo_out)
 
-        return geo_out, dnames
+        return geo_out, dnames, linear_VEL
     
     EW=Helper_Time_Series(stacked_raster='raster_stackxn.tif', velocity_points=velocity_points ,
                              dates_name='Names.txt', output_folder='stack_data/TS', outputFilename="TS_EW_"+ os.path.basename(velocity_points), std=std, VEL_Scale=VEL_Scale)
@@ -267,12 +271,20 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
     for col in gdf_ew[dnames].columns:
        
         df_2D_VEL[col]=np.hypot(gdf_ns[col],gdf_ew[col])
-        
+       
     df_2D_VEL['VEL_MEAN']=df_2D_VEL[dnames].mean(axis=1)
     df_2D_VEL['V_STDEV']=df_2D_VEL[dnames].std(axis=1)
+    #we call linear velocity function from above then reuse it below to replace VEL_2D Mean an STD below for lines
+    # linear_2D_Velocity_function=EW[2]
+    # linear_2D_Velocity=linear_2D_Velocity_function(df_2D_VEL[dnames], dnames)
+    # df_2D_VEL['VEL']=linear_2D_Velocity[0]
+    # df_2D_VEL['V_STDEV']=linear_2D_Velocity[1]
+    #############################
     col_titles=['CODE','geometry','x', 'y', 'VEL_MEAN' , 'V_STDEV' ]+ dnames 
     df_2D_VEL = df_2D_VEL.reindex(columns=col_titles)
     gdf_2D_VEL=gpd.GeoDataFrame(df_2D_VEL, geometry='geometry', crs=gdf_ew.crs)
+    
+    
     
     gdf_2D_VEL.to_file(output_folder +"/" + outputFilename)
     
@@ -307,6 +319,7 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
     corrected_mean_products['y']=gdf_ew['y']
     corrected_mean_products['VEL_E']=gdf_ew['VEL']
     corrected_mean_products['VEL_N']=gdf_ns['VEL']
+    #corrected_mean_products['VEL_2D']=df_2D_VEL['VEL_MEAN']
     corrected_mean_products['VEL_2D']=df_2D_VEL['VEL_MEAN']
     corrected_mean_products['2DV_STDEV']=df_2D_VEL['V_STDEV']
     corrected_mean_products['VEL_2DDir']=dir_df_2D_VEL['VELDir_MEAN']

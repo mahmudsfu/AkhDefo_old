@@ -5,32 +5,52 @@
 def stackprep(path_to_flowxnFolder=r"", path_toFlowynFolder=r"", dem=r"", print_list=False, start_date="YYYYMMDD", end_date="YYYYMMDD", output_stackedFolder=r"",
 VEL_scale=("month","year") , xres=3.125, yres=3.125, Velocity_shapeFile=False, Resampling=True ):
     
-   
-    
     '''
-    This program collects velocity candiate points for time-series analysis
+    This program collects velocity candiate points for time-series analysis.
+
+    Parameters
+    ----------
     
-    path_to_flowxnFolder=r"" path to folder include east-west velocity files
+    path_to_flowxnFolder : str
+        path to folder include east-west velocity files
     
-    path_toFlowynFolder=r"" path to folder include north-south velocity files
+    path_toFlowynFolder : str
+        path to folder include north-south velocity files
     
-    dem=r"" path to digital elevation model file will be used to geocode the products
+    dem : str
+        path to digital elevation model file will be used to geocode the products
     
-    print_list=False print list of temporal proceesed dates default is False
+    print_list : bool
+        print list of temporal proceesed dates default is False
     
-    start_date="YYYYMMDD"
+    start_date : str
+        "YYYYMMDD"
     
-    end_date="YYYYMMDD"
+    end_date : str
+        "YYYYMMDD"
     
-    output_stackedFolder=r""
+    output_stackedFolder : str
     
-    VEL_scale=("month","year")
+    VEL_scale : str
+        "month" or "year") at this stage you can ignore this option; will be removed from future versions
       
-    xres=3.125, yres=3.125
+    xres : float
+
+    yres : float
      
-    Velocity_shapeFile=False set to True if need to generate points for temporal deformation analysis
+    Velocity_shapeFile: bool
+
+        set to True if need to generate points for temporal deformation analysis
     
-    Resampling=True if True reduce number of measurement points but faster processing
+    Resampling : bool
+
+        if True reduce number of measurement points but faster processing
+
+    Returns
+    -------
+    ESRI Shapefile
+        This file include candiate velocity points for timeseries analysis
+        
     
     '''
     import geopandas as gpd
@@ -280,9 +300,9 @@ VEL_scale=("month","year") , xres=3.125, yres=3.125, Velocity_shapeFile=False, R
 #     #EndDate = (date1 - new_year_day).days + 1
 
 #     #No_ofDays= (date2 - date1).days + 1
-    basemap_list=sorted(glob.glob("filtered_rasters/*.tif"))
-    basemap_src=rasterio.open(basemap_list[0])
-    basemap_img=basemap_src.read(1)
+    # basemap_list=sorted(glob.glob("filtered_rasters/*.tif"))
+    # basemap_src=rasterio.open(basemap_list[0])
+    # basemap_img=basemap_src.read(1)
     
 
     def input_dates(start_date="YYYYMMDD", end_date="YYYYMMDD"):

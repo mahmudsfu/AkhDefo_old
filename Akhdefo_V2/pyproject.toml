@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "akhdefo_functions"
-version = "2.2.33"
+version = "2.2.36"
 authors = [
   { name="Mahmud Mustafa Muhammad", email="mahmud.muhamm1@gmail.com" },
 ]
@@ -23,6 +23,8 @@ classifiers=[
         "Programming Language :: Python :: 3.10",
 
     ]
+
+
 
 [project.urls]
 "Homepage" = "https://github.com/mahmudsfu/AkhDefo"

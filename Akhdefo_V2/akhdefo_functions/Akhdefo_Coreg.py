@@ -1,46 +1,43 @@
 def Coregistration(input_Folder=r"", output_folder=r"", grid_res=20, min_reliability=60, window_size=(64,64), path_figures=r"", showFig=False, no_data=[0,0], single_ref_path=""):
 
     """
-    This program coregisteres multiple rasters using both structural similarity index and feature matching techniqws. This program is written based on arosics python library
-
-    Inputs
+    This program coregisteres multiple rasters using both structural similarity index and feature matching techniqws.
+    This program is written based on arosics python library.
+    
+    Parameters
+    ----------
    
     input_Folder: str
-    Path to input raster folders
+        Path to input raster folders
  
     grid_res: int
     
     min_reliability: int
-    structural simialrity index threshold to differentaite deformation from raster shift (min=20, max=100)
+        structural simialrity index threshold to differentaite deformation from raster shift (min=20, max=100)
 
     window_size: tuple
-
-    window size for pixel search
+        window size for pixel search
 
     showFig: bool
-
-    True to display results or False to not displat results
+        True to display results or False to not displat results
 
     no_data: list
-
-    No data values to be ignored for both reference and target image
+        No data values to be ignored for both reference and target image
 
     single_ref_path: str
-
-    provide path to raster if interested to coregister all rasters to a single reference, ignore this option the program uses subsequent rasters as refernce. 
+        provide path to raster if interested to coregister all rasters to a single reference, ignore this option the program uses subsequent rasters as refernce. 
     
-
-    Returns:
-
     output_folder: str
-
-    returns coregistred and georeferenced raster in geotif format
+        returns coregistred and georeferenced raster in geotif format
 
     path_figures: str
+        returns figure with plotted displaced pixels in raster coordinate system units
 
-    returns figure with plotted displaced pixels in raster coordinate system units
+    Returns
+    -------
+    coregistred rasters
 
-
+   
     """
 
 

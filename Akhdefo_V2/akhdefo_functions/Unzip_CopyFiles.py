@@ -5,11 +5,20 @@ def unzip(zipdir, dst_dir ):
 
     """
     This program unzips all the zip products into one folder
+
+    Parameters
+    ----------
    
 
-    zipdir: path to directory contains all the zipfiles
+    zipdir : str
+        path to directory contains all the zipfiles
 
-    dst_dir: path to destination folder to copy all unzipped products.
+    dst_dir : str
+        path to destination folder to copy all unzipped products.
+
+    Returns
+    -------
+    unzip folder
 
     """
     import os 
@@ -37,7 +46,20 @@ def unzip(zipdir, dst_dir ):
 
 def copyImage_Data(path_to_unzipped_folders=r"", Path_to_raster_tifs=""):
     """
-    This program copy all the raster images
+    This program copy all the raster images.
+
+    Parameters
+    ----------
+
+    path_to_unzipped_folders : str
+
+    
+    Path_to_raster_tifs : str
+
+    Returns
+    -------
+    rasters
+
     """
     import os 
     import shutil
@@ -63,7 +85,20 @@ def copyImage_Data(path_to_unzipped_folders=r"", Path_to_raster_tifs=""):
 def copyUDM2_Mask_Data(path_to_unzipped_folders=r"", Path_to_UDM2raster_tifs=r""):
 
     """
-    This program copy all  raster masks
+    This program copy all  raster masks.
+
+    Parameters
+    ----------
+
+    path_to_unzipped_folders : str
+        file extension must end with udm2_clip.tif
+
+    Path_to_UDM2raster_tifs : str
+
+    Returns
+    -------
+    rasters
+
     """
     
     import os 

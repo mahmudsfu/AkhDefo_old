@@ -2,43 +2,52 @@
 
 
 def DynamicChangeDetection(Path_working_Directory=r"" , Path_UDM2_folder=r"",
- Path_to_DEMFile=r"", Coh_Thresh=0.75 , vel_thresh=0.063 , udm_mask_option=False , cmap='jet', Median_Filter=False, Set_fig_MinMax=False, show_figure=False, plot_option="origional"):
+ Path_to_DEMFile=r"", Coh_Thresh=0.75 , vel_thresh=0.063 , udm_mask_option=False , cmap='jet', Median_Filter=False, Set_fig_MinMax=False, show_figure=False, plot_option="origional", xres=10, yres=10):
     
 
     """
     This program calculates optical flow velocity from triplets of daily optical satellite images.
-    
-
-    Path_working_Directory=r""  
-
-    Path_UDM2_folder=r""
-
-    Path_to_DEMFile=r""
-
-    Coh_Thresh=0.75 
-
-    vel_thresh=0.063 
-
-    udm_mask_option=False 
-
-    cmap='jet'
-
-    Median_Filter=False
-
-    Set_fig_MinMax=False
-
-    show_figure=False
-
-    plot_option="origional"
-
-
-    Outputs:
-    Raster velocity in X direction(EW)
-    Raster Velocity in Y direction(NS)
-    Initial Timesereis Figures (those figures are only intermediate products needs calibration)
-    
-    Note:
     Final Timeseris products will be a shapefile format using Time_Series function after stackprep step.
+    
+    Parameters
+    ----------
+
+    Path_working_Directory : str
+
+    Path_UDM2_folder : str
+
+    Path_to_DEMFile : str
+
+    Coh_Thresh : float
+
+    vel_thresh : float
+
+    udm_mask_option : bool
+
+    cmap : str
+
+    Median_Filter : bool
+
+    Set_fig_MinMax : bool
+
+    show_figure : bool
+
+    plot_option : str
+        "origional",  "resampled"
+    
+    xres : int
+
+    yres : int
+
+    Returns
+    -------
+    Rasters
+         velocity in X direction(EW)
+         Velocity in Y direction(NS)
+
+    Figures  
+        Initial Timesereis Figures (those figures are only intermediate products needs calibration)
+    
 
     """
 
@@ -88,14 +97,7 @@ def DynamicChangeDetection(Path_working_Directory=r"" , Path_UDM2_folder=r"",
     output_dirflowxn=r"georeferenced_folder/flow_xn"
     output_dirflowyn=r"georeferenced_folder/flow_yn"
     output_VEL_Triplets=r"georeferenced_folder/VEL_Triplets"
-    if not os.path.exists(output_dirflowxn + "/resampled" ):
-        os.makedirs(output_dirflowxn + "/resampled")
-
-    if not os.path.exists(output_dirflowyn + "/resampled" ):
-        os.makedirs(output_dirflowyn + "/resampled")
-
-    if not os.path.exists(output_VEL_Triplets + "/resampled" ):
-        os.makedirs(output_VEL_Triplets + "/resampled")
+    
     
     # output_dir = r"Results_OpticalFlow"
     # gif_dir= r'Results_OpticalFlow/gif_dir'
@@ -762,13 +764,6 @@ def DynamicChangeDetection(Path_working_Directory=r"" , Path_UDM2_folder=r"",
         vname=output_VEL_Triplets + "/" + str(filename)
 
     
-
-        xname_int=output_dirflowxn + "/resampled" + "/" + str(filename)
-        yname_int=output_dirflowyn + "/resampled" + "/" + str(filename)
-        vname_int=output_VEL_Triplets + "/resampled" + "/" + str(filename)
-        
-    
-
     
         # ###Save interpolated rasters
         # with rasterio.open(xname_int, 'w', **meta) as dst:
@@ -816,10 +811,25 @@ def DynamicChangeDetection(Path_working_Directory=r"" , Path_UDM2_folder=r"",
             dsRes =None
             return output_raster
 
-        ew=resample(xname, xname_int, xres=10, yres=10)
-        ns=resample(yname, yname_int, xres=10, yres=10)
-        _2dvel=resample(vname, vname_int, xres=10, yres=10)
+        if plot_option=="resampled":
+            if not os.path.exists(output_dirflowxn + "/resampled" ):
+                os.makedirs(output_dirflowxn + "/resampled")
 
+            if not os.path.exists(output_dirflowyn + "/resampled" ):
+                os.makedirs(output_dirflowyn + "/resampled")
+
+            if not os.path.exists(output_VEL_Triplets + "/resampled" ):
+                os.makedirs(output_VEL_Triplets + "/resampled")
+
+
+            xname_int=output_dirflowxn + "/resampled" + "/" + str(filename)
+            yname_int=output_dirflowyn + "/resampled" + "/" + str(filename)
+            vname_int=output_VEL_Triplets + "/resampled" + "/" + str(filename)
+            ew=resample(xname, xname_int, xres=xres, yres=yres)
+            ns=resample(yname, yname_int, xres=xres, yres=yres)
+            _2dvel=resample(vname, vname_int, xres=xres, yres=yres)
+        else:
+            print(" User selected to ignore resampling raster images ")
         #####Plot Timeseries
 
         #Function to read dem and prepare it to create hillshade for basemap

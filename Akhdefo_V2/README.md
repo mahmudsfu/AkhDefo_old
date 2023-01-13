@@ -36,7 +36,7 @@ pip install -r pip_req.txt
 * Now install Akhdefo using the below command
 
 ```python
-pip install -i https://test.pypi.org/simple/ akhdefo-functions
+pip install akhdefo-functions
 ```
 
 # User Guide

@@ -5,16 +5,25 @@ def Filter_PreProcess(unfiltered_folderPath=r"", UDM2_maskfolderPath=r"", outpat
 
     """
     This program prepare and uses filters to balanace raster image brightness
+
+    Parameters
+    ----------
     
-    unfiltered_folderPath=r""
+    unfiltered_folderPath : str
 
-    UDM2_maskfolderPath=r""
+    UDM2_maskfolderPath : str
 
-    outpath_dir=r"" 
+    outpath_dir : str
 
-    Udm_Mask_Option=False if True the program uses planetlabs imagery unusable pixel mask to ignore and mask bad image pixels 
+    Udm_Mask_Option : bool
+        False if True the program uses planetlabs imagery unusable pixel mask to ignore and mask bad image pixels 
 
-
+    Returns
+    -------
+    geotif rasters
+        Filtered geotif rasters
+    Figures
+        plotted filtered rasters and mask for bad pixels
 
     """
     
