@@ -52,46 +52,46 @@ latex_use_modindex = True
 #latex_logo = None
 #latex_show_urls = False
 
-# -- Options for Epub output ---------------------------------------------------
+# # -- Options for Epub output ---------------------------------------------------
 
-epub_title = u'Akhdefo software documentation'
-epub_author = u'Mahmud Mustafa Muhammad'
-epub_publisher = u'Simon Fraser University/ Department of Earth Sciences'
-epub_copyright = u'2023, Mahmud Mustafa Muhammad'
+# epub_title = u'Akhdefo software documentation'
+# epub_author = u'Mahmud Mustafa Muhammad'
+# epub_publisher = u'Simon Fraser University/ Department of Earth Sciences'
+# epub_copyright = u'2023, Mahmud Mustafa Muhammad'
 
-epub_theme = 'epub2'
+# epub_theme = 'epub2'
 
-# The scheme of the identifier. Typical schemes are ISBN or URL.
-#epub_scheme = ''
+# # The scheme of the identifier. Typical schemes are ISBN or URL.
+# #epub_scheme = ''
 
-# The unique identifier of the text. This can be a ISBN number
-# or the project homepage.
-#epub_identifier = ''
+# # The unique identifier of the text. This can be a ISBN number
+# # or the project homepage.
+# #epub_identifier = ''
 
-# A unique identification for the text.
-#epub_uid = ''
+# # A unique identification for the text.
+# #epub_uid = ''
 
-# A tuple containing the cover image and cover page html template filenames.
-epub_cover = ("_static/cover.png", "epub-cover.html")
+# # A tuple containing the cover image and cover page html template filenames.
+# epub_cover = ("_static/cover.png", "epub-cover.html")
 
-# HTML files that should be inserted before the pages created by sphinx.
-# The format is a list of tuples containing the path and title.
-#epub_pre_files = []
+# # HTML files that should be inserted before the pages created by sphinx.
+# # The format is a list of tuples containing the path and title.
+# #epub_pre_files = []
 
-# HTML files shat should be inserted after the pages created by sphinx.
-# The format is a list of tuples containing the path and title.
-#epub_post_files = []
+# # HTML files shat should be inserted after the pages created by sphinx.
+# # The format is a list of tuples containing the path and title.
+# #epub_post_files = []
 
-# A list of files that should not be packed into the epub file.
-epub_exclude_files = ['_static/opensearch.xml', '_static/doctools.js',
-    '_static/jquery.js', '_static/searchtools.js', '_static/underscore.js',
-    '_static/basic.css', 'search.html', '_static/websupport.js']
+# # A list of files that should not be packed into the epub file.
+# epub_exclude_files = ['_static/opensearch.xml', '_static/doctools.js',
+#     '_static/jquery.js', '_static/searchtools.js', '_static/underscore.js',
+#     '_static/basic.css', 'search.html', '_static/websupport.js']
 
-# The depth of the table of contents in toc.ncx.
-epub_tocdepth = 2
+# # The depth of the table of contents in toc.ncx.
+# epub_tocdepth = 2
 
-# Allow duplicate toc entries.
-epub_tocdup = False
+# # Allow duplicate toc entries.
+# epub_tocdup = False
 
 
 import os
