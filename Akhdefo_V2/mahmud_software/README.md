@@ -38,6 +38,8 @@ pip install -r pip_req.txt
 ```python
 pip install akhdefo-functions
 ```
+# Documentation
+* [Click here to view akhdefo code documentations](https://akhdefo.readthedocs.io/en/latest/)
 
 # User Guide
 * Under construction will be released soon!
