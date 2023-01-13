@@ -9,16 +9,16 @@
 
 html_theme = 'book'
 html_theme_path = ['themes']
-html_title = "Music for Geeks and Nerds"
+html_title = "Akhdefo software documentation"
 #html_short_title = None
 #html_logo = None
 #html_favicon = None
 html_static_path = ['_static']
-html_domain_indices = False
-html_use_index = False
-html_show_sphinx = False
-htmlhelp_basename = 'MusicforGeeksandNerdsdoc'
-html_show_sourcelink = False
+html_domain_indices = True
+html_use_index = True
+html_show_sphinx = True
+htmlhelp_basename = 'Akhdefo software documentation'
+html_show_sourcelink = True
 
 # -- Options for LaTeX output --------------------------------------------------
 
@@ -42,22 +42,22 @@ latex_elements = {
 latex_additional_files = ["mfgan-bw.sty", "mfgan.sty", "_static/cover.png"]
 
 latex_documents = [
-  ('index', 'music-for-geeks-and-nerds.tex', u'Music for Geeks and Nerds',
-   u'Pedro Kroger', 'manual'),
+  ('index', 'Akhdefo software documentation.tex', u'Akhdefo software documentation',
+   u'Mahmud Mustafa Muhammad', 'manual'),
 ]
 
-latex_show_pagerefs = False
-latex_domain_indices = False
-latex_use_modindex = False
+latex_show_pagerefs = True
+latex_domain_indices = True
+latex_use_modindex = True
 #latex_logo = None
 #latex_show_urls = False
 
 # -- Options for Epub output ---------------------------------------------------
 
-epub_title = u'Music for Geeks and Nerds'
-epub_author = u'Pedro Kroger'
-epub_publisher = u'Pedro Kroger'
-epub_copyright = u'2012, Pedro Kroger'
+epub_title = u'Akhdefo software documentation'
+epub_author = u'Mahmud Mustafa Muhammad'
+epub_publisher = u'Simon Fraser University/ Department of Earth Sciences'
+epub_copyright = u'2023, Mahmud Mustafa Muhammad'
 
 epub_theme = 'epub2'
 
@@ -109,7 +109,7 @@ release = '2023'
 extensions = ['sphinx.ext.duration',
    'sphinx.ext.doctest',
    'sphinx.ext.autodoc',
-   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx',"sphinxawesome_theme",]
+   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx',]
 
 
 autodoc_mock_imports = ["akhdefo_functions.unzip",

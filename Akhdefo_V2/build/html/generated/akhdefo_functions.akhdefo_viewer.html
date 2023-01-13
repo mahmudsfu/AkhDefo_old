@@ -2,37 +2,47 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
-<title>akhdefo_functions.akhdefo_viewer — Music for Geeks and Nerds</title>
-<link href="../_static/pygments.css" rel="stylesheet" type="text/css"/>
-<link href="../_static/alabaster.css" rel="stylesheet" type="text/css"/>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-<script src="../_static/jquery.js"></script>
-<script src="../_static/underscore.js"></script>
-<script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-<script src="../_static/doctools.js"></script>
-<script src="../_static/sphinx_highlight.js"></script>
-<link href="../search.html" rel="search" title="Search"/>
-<link href="akhdefo_functions.Akhdefo_resample.html" rel="next" title="akhdefo_functions.Akhdefo_resample"/>
-<link href="akhdefo_functions.rasterClip.html" rel="prev" title="akhdefo_functions.rasterClip"/>
-<link href="../_static/custom.css" rel="stylesheet" type="text/css"/>
-<meta content="width=device-width, initial-scale=0.9, maximum-scale=0.9" name="viewport"/>
-</head><body>
-<div class="document">
-<div class="documentwrapper">
-<div class="bodywrapper">
-<div class="body" role="main">
-<section id="akhdefo-functions-akhdefo-viewer">
-<h1>akhdefo_functions.akhdefo_viewer<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#akhdefo-functions-akhdefo-viewer">¶</a></h1>
-<dl class="py function code-definition">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>akhdefo_functions.akhdefo_viewer &#8212; Akhdefo software documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="akhdefo_functions.Akhdefo_resample" href="akhdefo_functions.Akhdefo_resample.html" />
+    <link rel="prev" title="akhdefo_functions.rasterClip" href="akhdefo_functions.rasterClip.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="akhdefo-functions-akhdefo-viewer">
+<h1>akhdefo_functions.akhdefo_viewer<a class="headerlink" href="#akhdefo-functions-akhdefo-viewer" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
 <dt class="sig sig-object py" id="akhdefo_functions.akhdefo_viewer">
-<code class="sig-prename descclassname">akhdefo_functions.</code><code class="sig-name descname">akhdefo_viewer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Path_to_DEMFile</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">rasterfile</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">cbar_label</span><span class="o">=</span><span class="default_value">'Velocity(mm/year)'</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">'Akhdefo-Viewer'</span></em>, <em class="sig-param"><span class="n">pixel_resolution_meter</span><span class="o">=</span><span class="default_value">3.125</span></em>, <em class="sig-param"><span class="n">outputfolder</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.8</span></em>, <em class="sig-param"><span class="n">unit</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">cmap</span><span class="o">=</span><span class="default_value">'jet'</span></em>, <em class="sig-param"><span class="n">noDATA_Mask</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Normalize</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">SetDates_Filename</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Set_fig_MinMax</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#akhdefo_functions.akhdefo_viewer">¶</a></dt>
-<dd>
-<p>This program used for plotting raster products.</p>
+<span class="sig-prename descclassname"><span class="pre">akhdefo_functions.</span></span><span class="sig-name descname"><span class="pre">akhdefo_viewer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Path_to_DEMFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rasterfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbar_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Velocity(mm/year)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Akhdefo-Viewer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_resolution_meter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.125</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputfolder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noDATA_Mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SetDates_Filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Set_fig_MinMax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#akhdefo_functions.akhdefo_viewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>This program used for plotting raster products.</p>
 <section id="parameters">
-<h2>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#parameters">¶</a></h2>
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
 <dl class="simple">
 <dt>Path_to_DEMFile<span class="classifier">str </span></dt><dd><p>provide path to digital elevation raster file to be used as shaded base Map</p>
 </dd>
@@ -55,17 +65,29 @@
 </dl>
 </section>
 <section id="returns">
-<h2>Returns<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#returns">¶</a></h2>
+<h2>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">¶</a></h2>
 <p>Figure</p>
 </section>
 </dd></dl>
+
 </section>
-</div>
-</div>
-</div>
-<div aria-label="main navigation" class="sphinxsidebar" role="navigation">
-<div class="sphinxsidebarwrapper">
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">akhdefo</a></h1>
+
+
+
+
+
+
+
+
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="akhdefo_functions.unzip.html">akhdefo_functions.unzip</a></li>
@@ -81,8 +103,8 @@
 <li class="toctree-l1"><a class="reference internal" href="akhdefo_functions.Time_Series.html">akhdefo_functions.Time_Series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="akhdefo_functions.akhdefo_ts_plot.html">akhdefo_functions.akhdefo_ts_plot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="akhdefo_functions.rasterClip.html">akhdefo_functions.rasterClip</a></li>
-<li class="toctree-l1 current expanded"><a class="current reference internal" href="#">akhdefo_functions.akhdefo_viewer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#akhdefo_functions.akhdefo_viewer"><code class="docutils literal notranslate">akhdefo_viewer()</code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">akhdefo_functions.akhdefo_viewer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#akhdefo_functions.akhdefo_viewer"><code class="docutils literal notranslate"><span class="pre">akhdefo_viewer()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="akhdefo_functions.Akhdefo_resample.html">akhdefo_functions.Akhdefo_resample</a></li>
@@ -91,37 +113,54 @@
 <li class="toctree-l1"><a class="reference internal" href="akhdefo_functions.MeanProducts_plot_ts.html">akhdefo_functions.MeanProducts_plot_ts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="akhdefo_functions.Auto_Variogram.html">akhdefo_functions.Auto_Variogram</a></li>
 </ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-<li><a href="../index.html">Documentation overview</a><ul>
-<li><a href="../api.html">&lt;no title&gt;</a><ul>
-<li>Previous: <a href="akhdefo_functions.rasterClip.html" title="previous chapter">akhdefo_functions.rasterClip</a></li>
-<li>Next: <a href="akhdefo_functions.Akhdefo_resample.html" title="next chapter">akhdefo_functions.Akhdefo_resample</a></li>
-</ul></li>
-</ul></li>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api.html">&lt;no title&gt;</a><ul>
+      <li>Previous: <a href="akhdefo_functions.rasterClip.html" title="previous chapter">akhdefo_functions.rasterClip</a></li>
+      <li>Next: <a href="akhdefo_functions.Akhdefo_resample.html" title="next chapter">akhdefo_functions.Akhdefo_resample</a></li>
+  </ul></li>
+  </ul></li>
 </ul>
 </div>
-<div id="searchbox" role="search" style="display: none">
-<h3 id="searchlabel">Quick search</h3>
-<div class="searchformwrapper">
-<form action="../search.html" class="search" method="get">
-<input aria-labelledby="searchlabel" autocapitalize="off" autocomplete="off" autocorrect="off" name="q" spellcheck="false" type="text"/>
-<input type="submit" value="Go"/>
-</form>
-</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
 </div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
-</div>
-</div>
-<div class="clearer"></div>
-</div>
-<div class="footer">
-      ©2023, Mahmud Mustafa Muhammad.
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Mahmud Mustafa Muhammad.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-</div>
-</body>
+      
+      |
+      <a href="../_sources/generated/akhdefo_functions.akhdefo_viewer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
 </html>
