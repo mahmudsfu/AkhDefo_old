@@ -1,6 +1,6 @@
 
 def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"", dates_name=r"", output_folder="", outputFilename="",
-                rasteriz_mean_products=True, std=1, VEL_Scale='year'):
+                rasteriz_mean_products=True, std=1, VEL_Scale='year' , velocity_mode="mean", master_reference=False):
     
     '''
     This program uses candiate velocity points from stackprep function and performs linear interpolation in time-domain to calibrate
@@ -23,6 +23,14 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
     
     outputFilename : str
     
+    VEL_Scale   : str
+        'year' , "month" or empty  to calculate velocity within provided dataset date range
+    
+    velocity_mode   : str
+        "mean" or "linear"
+        
+    master_reference : bool
+        True if calculate TS to a single reference date, False if calculate TS to subsequent Reference dates
     
     Returns
     -------
@@ -99,7 +107,7 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
         #Add Timesereises column names
         
         #find outliers using z-score iter 1
-        lim = np.abs((df2[cc] - df2[cc].mean(axis=0)) / df2[cc].std(ddof=0, axis=1)) < std
+        lim = np.abs((df2[cc] - df2[cc].mean(axis=1)) / df2[cc].std(ddof=0, axis=1)) < std
         
         # # # replace outliers with nan
         df2[cc]= df2[cc].where(lim, np.nan)
@@ -147,7 +155,7 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
             dd_list=[x.replace("D", "") for x in dnames]
             dates_list=([datetime.strptime(x, '%Y%m%d') for x in dd_list])
             days_num=[( ((x) - (pd.Timestamp(year=x.year, month=1, day=1))).days + 1) for x in dates_list]
-
+            days_num=list(range(0, len(dnames)))
             dslope=[]
             std_slope=[]
             for index, dr in df.iterrows():
@@ -166,7 +174,7 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
         
         
         
-        linear_velocity=linear_VEL(df2, dnames)
+        
             
         
         ###########################################################################
@@ -209,23 +217,41 @@ def Time_Series(stacked_raster_EW=r"", stacked_raster_NS=r"", velocity_points=r"
         temp_df=pd.DataFrame()
         temp_df[dnames[0]]=df2[dnames[0]]
         #Choosing first date as reference for Time Series
-        out = df2.add(df2[df2.columns[0]], axis=0)
         
-        #out['VEL']=out[dnames].mean(axis=1)
-        out['VEL']=linear_velocity[0]
-        out['VEL_STD']=linear_velocity[1]
-        if VEL_Scale=="month":
+        if master_reference==True:
+            
+            df2 = df2.sub(df2[dnames[0]], axis=0)
+        else:
+            
+            df2=df2.diff(axis = 1, periods = 1)
+        # count=0
+        # for idx, col in enumerate(df2.columns):
+        #     df2[col] = df2[col].sub(df2[dnames[count]], axis=0)
+        #     count=count+1
+            
+       
+        df2[dnames[0]]=0
+            
+        linear_velocity=linear_VEL(df2[dnames], dnames)
+        out=df2
+        if velocity_mode=="mean":
+            out['VEL']=out[dnames].mean(axis=1)
+            out['VEL_STD']=out[dnames].std(axis=1)
+        elif velocity_mode=="linear":
+            out['VEL']=linear_velocity[0]
+            out['VEL_STD']=linear_velocity[1]
+        if VEL_Scale=="month": 
             out['VEL']=out['VEL']/velocity_scale[2] * 30
             out['VEL_STD']=out['VEL_STD']/velocity_scale[2] *30
         elif VEL_Scale=="year":
             out['VEL']=out['VEL']/velocity_scale[2] * 365
             out['VEL_STD']=out['VEL_STD']/velocity_scale[2] * 365
-        else:
-            out['VEL']=out['VEL']
+            
+        
             
         out['geometry']=df['geometry']
         out['CODE']=df['SiteID']
-        out[dnames[0]]=temp_df[dnames[0]]
+        #out[dnames[0]]=temp_df[dnames[0]]
         # out['HEIGHT']=0
         # out['H_STDEV']=0
         #out['V_STDEV']=out[dnames].std(axis=1)

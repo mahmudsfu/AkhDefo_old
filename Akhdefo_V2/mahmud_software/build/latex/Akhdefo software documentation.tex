@@ -44,7 +44,7 @@
 
 
 \title{Akhdefo software documentation}
-\date{Jan 13, 2023}
+\date{Jan 19, 2023}
 \release{2023}
 \author{Mahmud Mustafa Muhammad}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -725,7 +725,7 @@ This file include candiate velocity points for timeseries analysis
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{generated/akhdefo_functions.Time_Series:akhdefo_functions.Time_Series}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{akhdefo\_functions.}}\sphinxbfcode{\sphinxupquote{Time\_Series}}}{\emph{\DUrole{n}{stacked\_raster\_EW}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{stacked\_raster\_NS}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{velocity\_points}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{dates\_name}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{output\_folder}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{outputFilename}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{rasteriz\_mean\_products}\DUrole{o}{=}\DUrole{default_value}{True}}, \emph{\DUrole{n}{std}\DUrole{o}{=}\DUrole{default_value}{1}}, \emph{\DUrole{n}{VEL\_Scale}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}year\textquotesingle{}}}}{}
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{akhdefo\_functions.}}\sphinxbfcode{\sphinxupquote{Time\_Series}}}{\emph{\DUrole{n}{stacked\_raster\_EW}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{stacked\_raster\_NS}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{velocity\_points}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{dates\_name}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{output\_folder}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{outputFilename}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{rasteriz\_mean\_products}\DUrole{o}{=}\DUrole{default_value}{True}}, \emph{\DUrole{n}{std}\DUrole{o}{=}\DUrole{default_value}{1}}, \emph{\DUrole{n}{VEL\_Scale}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}year\textquotesingle{}}}, \emph{\DUrole{n}{velocity\_mode}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}mean\textquotesingle{}}}, \emph{\DUrole{n}{master\_reference}\DUrole{o}{=}\DUrole{default_value}{False}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
 This program uses candiate velocity points from stackprep function and performs linear interpolation in time\sphinxhyphen{}domain to calibrate
@@ -755,6 +755,20 @@ output\_folder : str
 
 \sphinxAtStartPar
 outputFilename : str
+\begin{description}
+\sphinxlineitem{VEL\_Scale}{[}str{]}
+\sphinxAtStartPar
+‘year’ , “month” or empty  to calculate velocity within provided dataset date range
+
+\sphinxlineitem{velocity\_mode}{[}str{]}
+\sphinxAtStartPar
+“mean” or “linear”
+
+\sphinxlineitem{master\_reference}{[}bool{]}
+\sphinxAtStartPar
+True if calculate TS to a single reference date, False if calculate TS to subsequent Reference dates
+
+\end{description}
 
 
 \section{Returns}
@@ -1115,7 +1129,7 @@ zone\_letter: “N” or “S”
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{generated/akhdefo_functions.MeanProducts_plot_ts:akhdefo_functions.MeanProducts_plot_ts}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{akhdefo\_functions.}}\sphinxbfcode{\sphinxupquote{MeanProducts\_plot\_ts}}}{\emph{\DUrole{n}{path\_to\_shapefile}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{dem\_path}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{out\_folder}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}Figs\_analysis\textquotesingle{}}}, \emph{\DUrole{n}{color\_field}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{Set\_fig\_MinMax}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{MinMaxRange}\DUrole{o}{=}\DUrole{default_value}{{[}\sphinxhyphen{}100, 100{]}}}, \emph{\DUrole{n}{opacity}\DUrole{o}{=}\DUrole{default_value}{0.5}}, \emph{\DUrole{n}{cmap}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}jet\textquotesingle{}}}, \emph{\DUrole{n}{point\_size}\DUrole{o}{=}\DUrole{default_value}{1}}, \emph{\DUrole{n}{cbar\_label}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}mm/year\textquotesingle{}}}}{}
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{akhdefo\_functions.}}\sphinxbfcode{\sphinxupquote{MeanProducts\_plot\_ts}}}{\emph{\DUrole{n}{path\_to\_shapefile}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{dem\_path}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{out\_folder}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}Figs\_analysis\textquotesingle{}}}, \emph{\DUrole{n}{color\_field}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}, \emph{\DUrole{n}{Set\_fig\_MinMax}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{MinMaxRange}\DUrole{o}{=}\DUrole{default_value}{{[}\sphinxhyphen{}100, 100{]}}}, \emph{\DUrole{n}{opacity}\DUrole{o}{=}\DUrole{default_value}{0.5}}, \emph{\DUrole{n}{cmap}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}jet\textquotesingle{}}}, \emph{\DUrole{n}{point\_size}\DUrole{o}{=}\DUrole{default_value}{1}}, \emph{\DUrole{n}{cbar\_label}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}mm/year\textquotesingle{}}}, \emph{\DUrole{n}{batch\_plot}\DUrole{o}{=}\DUrole{default_value}{False}}, \emph{\DUrole{n}{dates\_list}\DUrole{o}{=}\DUrole{default_value}{\textquotesingle{}\textquotesingle{}}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
 This program used to plot shapefile data

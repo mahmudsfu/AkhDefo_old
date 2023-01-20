@@ -379,7 +379,7 @@ def plot_stackNetwork(src_folder=r"", output_folder=r"" , cmap='tab20', date_plo
 
 def akhdefo_ts_plot(path_to_shapefile=r"", dem_path=r"", point_size=1.0, opacity=0.75, cmap="turbo",
                     Set_fig_MinMax=True, MinMaxRange=[-50,50] , color_field='VEL', user_data_points="", 
-                    path_saveData_points="" , save_plot=False, Fig_outputDir='' , VEL_Scale='year' ):
+                    path_saveData_points="" , save_plot=False, Fig_outputDir='' , VEL_Scale='year'):
     '''
     This program used for analysis time-series velocity profiles
 
@@ -474,10 +474,12 @@ def akhdefo_ts_plot(path_to_shapefile=r"", dem_path=r"", point_size=1.0, opacity
         from sklearn.linear_model import LinearRegression
         from datetime import datetime
         import math
+        from ipywidgets import interact
+        from ipywidgets import widgets
         
-        py_offline.init_notebook_mode()
-        #%matplotlib widget
-        #df=pd.read_csv("temp.csv")
+        df=pd.read_csv("temp.csv")
+        
+
         df.rename(columns={ df.columns[0]: "dd" }, inplace = True)
         df['dd_str']=df['dd'].astype(str)
         df['dd_str'] = df['dd_str'].astype(str)
@@ -504,188 +506,295 @@ def akhdefo_ts_plot(path_to_shapefile=r"", dem_path=r"", point_size=1.0, opacity
         #df=df.set_index(df['row_count'], inplace=True)
 
         df.sort_index(ascending=True, inplace=True)
-        
-
-        def best_fit_slope_and_intercept(xs,ys):
-            from statistics import mean
-            xs = np.array(xs, dtype=np.float64)
-            ys = np.array(ys, dtype=np.float64)
-            m = (((mean(xs)*mean(ys)) - mean(xs*ys)) /
-                ((mean(xs)*mean(xs)) - mean(xs*xs)))
-            
-            b = mean(ys) - m*mean(xs)
-            
-            return m, b
-
-        
-
-        #convert dattime to number of days per year
-        
-        
-        
-
-        dates_list=([datetime.strptime(x, '%Y%m%d') for x in df.dd_str])
-        days_num=[( ((x) - (pd.Timestamp(year=x.year, month=1, day=1))).days + 1) for x in dates_list]
-        time2=days_num[len(days_num)-1]
-        time1=days_num[0]
-        delta=time2-time1
-        delta=float(delta)
-        print(days_num, delta)
-       
-        m, b = best_fit_slope_and_intercept(df.row_count, df.val)
-        print("m:", math.ceil(m*100)/100, "b:",math.ceil(b*100)/100)
-        regression_model = LinearRegression()
-        val_dates_res = regression_model.fit(np.array(days_num).reshape(-1,1), np.array(df.val))
-        y_predicted = regression_model.predict(np.array(days_num).reshape(-1,1))
-        
-        if VEL_Scale=='year':
-            rate_change=regression_model.coef_[0]/delta * 365.0
-        elif VEL_Scale=='month':
-            rate_change=regression_model.coef_[0]/delta * 30
-            
-        # model evaluation
-        mse=mean_squared_error(np.array(df.val),y_predicted)
-        rmse = np.sqrt(mean_squared_error(np.array(df.val), y_predicted))
-        r2 = r2_score(np.array(df.val), y_predicted)
-        
-        # printing values
-        print('Slope(linear deformation rate):' + str(math.ceil(regression_model.coef_[0]*100)/100/delta) + " mm/day")
-        print('Intercept:', math.ceil(b*100)/100)
-        #print('MSE:',mse)
-        print('Root mean squared error: ', math.ceil(rmse*100)/100)
-        print('R2 score: ', r2)
-        print("STD: ",math.ceil(np.std(y_predicted)*100)/100) 
-        # Create figure
-        #fig = go.Figure()
-        
-        fig = go.FigureWidget()
-        
-        plot_number="Plot Number:"+str(plot_number)
-
-        fig.add_trace(go.Scatter(x=list(df.index), y=list(df.val)))
-        fig = px.scatter(df, x=list(df.index), y=list(df.val),
-                    color="val", hover_name="val"
-                        , labels=dict(x="Dates", y="mm/"+VEL_Scale , color="mm/"+VEL_Scale))
-        
-        # fig.add_trace(
-        # go.Scatter(x=list(df.index), y=list(val_fit), mode = "lines",name="trendline", marker_color = "red"))
-        
-        
-        
-        fig.add_trace(go.Scatter(x=list(df.index), y=list(df.val),mode = 'lines',
-                                name = 'draw lines', line = dict(shape = 'linear', color = 'rgb(0, 0, 0)', dash = 'dash'), connectgaps = True))
-        
-        fig.add_trace(
-            go.Scatter(x=list(df.index), y=list(y_predicted), mode = "lines",name="trendline", marker_color = "black", line_color='red'))
-        
-        
-
-        # Add range slider
-        fig.update_layout(
-            xaxis=dict(
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=1,
-                            label="1m",
-                            step="month",
-                            stepmode="backward"),
-                        dict(count=6,
-                            label="6m",
-                            step="month",
-                            stepmode="backward"),
-                        dict(count=1,
-                            label="YTD",
-                            step="year",
-                            stepmode="todate"),
-                        dict(count=1,
-                            label="1y",
-                            step="year",
-                            stepmode="backward"),
-                        dict(step="all")
-                    ])
-                ),
-                rangeslider=dict(
-                    visible=True
-                ),
-                type="date"
-            ) 
-        )
-        fig.update_xaxes(rangeslider_thickness = 0.05)
-        #fig.update_layout(showlegend=True)
-
-        #fig.data[0].update(line_color='black')
-        tt= "Defo-Rate:"+str(round(rate_change,2))+":"+ "Defo-Rate-STD:"+str(round(np.std(y_predicted), 2))+ ":" +plot_number
-        
-        # make space for explanation / annotation
-        fig.update_layout(margin=dict(l=20, r=20, t=20, b=60),paper_bgcolor="LightSteelBlue")
-
-        
-        fig.update_layout(
-            
-        title_text=tt, title_font_family="Sitka Small",
-        title_font_color="red", title_x=0.5 , legend_title="Legend",
-        font=dict(
-            family="Courier New, monospace",
-            size=15,
-            color="RebeccaPurple" ))
-        
-        fig.update_layout(legend=dict(
-        yanchor="top",
-        y=-0,
-        xanchor="left",
-        x=1.01
-    ))
-
-        # fig.update_layout(
-        # updatemenus=[
-        #     dict(
-        #         type="buttons",
-        #         direction="right",
-        #         active=0,
-        #         x=0.57,
-        #         y=1.2,
-        #         buttons=list([
-        #             dict(
-        #                 args=["colorscale", "Viridis"],
-        #                 label="Viridis",
-        #                 method="restyle"
-        #             ),
-        #             dict(
-        #                 args=["colorscale", "turbo"],
-        #                 label="turbo",
-        #                 method="restyle"
-        #             )
-        #         ]),
-        #     )
-        # ])
-
-        
-        fig.update_xaxes(showspikes=True, spikemode='toaxis' , spikesnap='cursor', spikedash='dot', spikecolor='blue', scaleanchor='y', title_font_family="Arial", 
-                        title_font=dict(size=15))
-        fig.update_yaxes(showspikes=True, spikemode='toaxis' , spikesnap='cursor', spikedash='dot', spikecolor='blue', scaleanchor='x', title_font_family="Arial",
-                        title_font=dict(size=15))
-
-        
-        
-        if save_plot==True:
-        
-            if not os.path.exists(output_dir):
-                os.mkdir(output_dir)
-
-            fig.write_html(output_dir + "/" + plot_filename + ".html" )
-            fig.write_image(output_dir + "/" + plot_filename + ".jpeg", scale=1, width=1080, height=300 )
-            
-        
-        def zoom(layout, xrange):
-            in_view = df.loc[fig.layout.xaxis.range[0]:fig.layout.xaxis.range[1]]
-            fig.layout.yaxis.range = [in_view.High.min() - 10, in_view.High.max() + 10]
-
-        fig.layout.on_change(zoom, 'xaxis.range')
-        
-        fig.show()
     
     
+    
+    
+        
+        
+        #####start building slider
+        widgets.SelectionRangeSlider(
+        options=df.index,
+        description='Dates',
+        orientation='horizontal',
+        layout={'width': '1000px'})
+        
+        
+        ############
+        def ts_helper(df, VEL_Scale=VEL_Scale, plot_number=plot_number):
+            # py_offline.init_notebook_mode()
+            # #%matplotlib widget
+            # df=pd.read_csv("temp.csv")
+            # df.rename(columns={ df.columns[0]: "dd" }, inplace = True)
+            # df['dd_str']=df['dd'].astype(str)
+            # df['dd_str'] = df['dd_str'].astype(str)
+            # df.rename(columns={ df.columns[1]: "val" }, inplace = True)
+            # df['dd']= pd.to_datetime(df['dd'].astype(str), format='%Y%m%d')
+            # df=df.set_index('dd')
+            # ########################
+            # df=df.dropna()
+            # # Make index pd.DatetimeIndex
+            # df.index = pd.DatetimeIndex(df.index)
+            # # Make new index
+            # idx = pd.date_range(df.index.min(), df.index.max())
+            # # Replace original index with idx
+            # df = df.reindex(index = idx)
+            # # Insert row count
+            # df.insert(df.shape[1],
+            #         'row_count',
+            #         df.index.value_counts().sort_index().cumsum())
 
+            # df=df.dropna()
+            
+            #df=df.set_index(df['row_count'], inplace=True)
+
+            #df=df.sort_index(ascending=True, inplace=True)
+
+            def best_fit_slope_and_intercept(xs,ys):
+                from statistics import mean
+                xs = np.array(xs, dtype=np.float64)
+                ys = np.array(ys, dtype=np.float64)
+                m = (((mean(xs)*mean(ys)) - mean(xs*ys)) /
+                    ((mean(xs)*mean(xs)) - mean(xs*xs)))
+                
+                b = mean(ys) - m*mean(xs)
+                
+                return m, b
+
+            #convert dattime to number of days per year
+            
+            
+            dates_list=([datetime.strptime(x, '%Y%m%d') for x in df.dd_str])
+            #days_num=[( ((x) - (pd.Timestamp(year=x.year, month=1, day=1))).days + 1) for x in dates_list]
+            dd_days=dates_list[len(dates_list)-1]- dates_list[0]
+            print(dates_list[0], dates_list[len(dates_list)-1] , dd_days)
+            dd_days=str(dd_days)
+            dd_days=dd_days.removesuffix('days, 0:00:00')
+            delta=int(dd_days)
+            m, b = best_fit_slope_and_intercept(df.row_count, df.val)
+            print("m:", math.ceil(m*100)/100, "b:",math.ceil(b*100)/100)
+            regression_model = LinearRegression()
+            val_dates_res = regression_model.fit(np.array(df.row_count).reshape(-1,1), np.array(df.val))
+            y_predicted = regression_model.predict(np.array(df.row_count).reshape(-1,1))
+        
+            if VEL_Scale=='year':
+                rate_change=regression_model.coef_[0]/ delta * 365.0
+            elif VEL_Scale=='month':
+                rate_change=regression_model.coef_[0]/delta * 30
+            else:
+                rate_change=regression_model.coef_[0]/delta
+                
+            # model evaluation
+            mse=mean_squared_error(np.array(df.val),y_predicted)
+            rmse = np.sqrt(mean_squared_error(np.array(df.val), y_predicted))
+            r2 = r2_score(np.array(df.val), y_predicted)
+            
+            # printing values
+            slope= ('Slope(linear deformation rate):' + str(math.ceil((regression_model.coef_[0]/delta)*100)/100) + " mm/day")
+            Intercept=('Intercept:'+ str(math.ceil(b*100)/100))
+            #print('MSE:',mse)
+            rmse=('Root mean squared error: '+ str(math.ceil(rmse*100)/100))
+            r2=('R2 score: '+ str(r2))
+            std=("STD: "+ str(math.ceil(np.std(y_predicted)*100)/100)) 
+            # Create figure
+            #fig = go.Figure()
+            
+            return y_predicted, rate_change, slope, Intercept, rmse, r2, std, plot_number, print(len(df)), dd_days
+        
+        
+        @interact
+        def read_values(
+            slider = widgets.SelectionRangeSlider(
+            options=df.index,
+            index=(0, len(df.index) - 1),
+            description='Dates',
+            orientation='horizontal',
+            layout={'width': '500px'},
+            continuous_update=True) ):
+            
+            #df=pd.read_csv("temp.csv")
+            df=pd.read_csv("temp.csv")
+
+            df.rename(columns={ df.columns[0]: "dd" }, inplace = True)
+            df['dd_str']=df['dd'].astype(str)
+            df['dd_str'] = df['dd_str'].astype(str)
+            df.rename(columns={ df.columns[1]: "val" }, inplace = True)
+            df['dd']= pd.to_datetime(df['dd'].astype(str), format='%Y%m%d')
+            
+            df=df.set_index('dd')
+            
+            ########################
+            df=df.dropna()
+            # Make index pd.DatetimeIndex
+            df.index = pd.DatetimeIndex(df.index)
+            # Make new index
+            idx = pd.date_range(df.index.min(), df.index.max())
+            # Replace original index with idx
+            df = df.reindex(index = idx)
+            # Insert row count
+            df.insert(df.shape[1],
+                    'row_count',
+                    df.index.value_counts().sort_index().cumsum())
+
+            df=df.dropna()
+            
+            #df=df.set_index(df['row_count'], inplace=True)
+
+            df.sort_index(ascending=True, inplace=True)
+            
+            
+            
+            df=df.loc[slider[0]: slider[1]]
+            
+            
+             
+            
+            helper=ts_helper(df, VEL_Scale=VEL_Scale)
+            
+            y_predicted=helper[0]
+            rate_change=helper[1]
+            slope=helper[2]
+            Intercept=helper[3]
+            rmse=helper[4]
+            r2=helper[5]
+            std=helper[6]
+            plot_number=helper[7]
+            
+            print(rate_change)
+            print(slope)
+            print(rmse)
+            print(std)
+            print(Intercept)
+            
+        
+            # fig = go.Figure()
+            
+            # plot_number="Plot Number:"+str(plot_number)
+
+            # fig.add_trace(go.Scatter(x=(df.index), y=(df.val)))
+            # fig = px.scatter(df, x=list(df.index), y=list(df.val),
+            #             color="val", hover_name="val"
+            #                 , labels=dict(x="Dates", y="mm/"+VEL_Scale , color="mm/"+VEL_Scale))
+            
+            
+            
+            # fig.add_trace(go.Scatter(x=(df.index), y=(df.val),mode = 'lines',
+            #                         name = 'draw lines', line = dict(shape = 'linear', color = 'rgb(0, 0, 0)', dash = 'dash'), connectgaps = True))
+            
+            # fig.add_trace(
+            #     go.Scatter(x=(df.index), y=(y_predicted), mode = "lines",name="trendline", marker_color = "black", line_color='red'))
+            
+            
+            
+            # Add range slider
+            # fig.update_layout(
+            #     xaxis=dict(
+            #         rangeselector=dict(
+            #             buttons=list([  
+            #                 dict(count=1,
+            #                     label="1y",
+            #                     step="year",
+            #                     stepmode="backward"),
+            #                 dict(step="all")
+            #             ])
+            #         ),
+            #         rangeslider=dict(
+            #             visible=True
+            #         ),
+            #         type="date"
+            #     ) 
+            # )
+            # fig.update_xaxes(rangeslider_thickness = 0.05)
+            # #fig.update_layout(showlegend=True)
+
+            # #fig.data[0].update(line_color='black')
+            # tt= "Defo-Rate:"+str(round(rate_change,2))+":"+ "Defo-Rate-STD:"+str(round(np.std(y_predicted), 2))+ ":" +plot_number
+            
+            # # make space for explanation / annotation
+            # fig.update_layout(margin=dict(l=20, r=20, t=20, b=60),paper_bgcolor="LightSteelBlue")
+
+            
+            # fig.update_layout(
+                
+            # title_text=tt, title_font_family="Sitka Small",
+            # title_font_color="red", title_x=0.5 , legend_title="Legend",
+            # font=dict(
+            #     family="Courier New, monospace",
+            #     size=15,
+            #     color="RebeccaPurple" ))
+            
+            # fig.update_layout(legend=dict(
+            # yanchor="top",
+            # y=-0,
+            # xanchor="left",
+            # x=1.01))
+
+           
+
+            
+            # fig.update_xaxes(showspikes=True, spikemode='toaxis' , spikesnap='cursor', spikedash='dot', spikecolor='blue', scaleanchor='y', title_font_family="Arial", 
+            #                 title_font=dict(size=15))
+            # fig.update_yaxes(showspikes=True, spikemode='toaxis' , spikesnap='cursor', spikedash='dot', spikecolor='blue', scaleanchor='x', title_font_family="Arial",
+            #                 title_font=dict(size=15))
+
+            fig = go.Figure()
+            fig.update_xaxes(range=[slider[0], slider[1]])
+            trace1 = go.Scatter(x=(df.index), y=(y_predicted), mode='lines', name='Trendline')
+            fig.add_trace(trace1)
+            trace2 = go.Scatter(x=(df.index), y=(df.val), mode='markers', name='Data-Points')
+            fig.add_trace(trace2)
+            trace3 = go.Scatter(x=(df.index), y=(df.val), mode='lines', name='Draw-line', visible='legendonly')
+            fig.add_trace(trace3)
+            
+            fig.update_layout(xaxis_title="Date", yaxis_title="millimeter")
+            
+            unit=helper[9]+ "days"
+            if VEL_Scale=="year":
+                unit="year"
+            elif VEL_Scale=="month":
+                unit="month"
+            else:
+                unit=unit
+            
+            tt= "Defo-Rate:"+str(round(rate_change,2))+"mm/"+unit+":"+ "Defo-Rate-STD:"+str(round(np.std(y_predicted), 2))+ ":Plot ID-" + str(plot_number)
+            
+            fig.update_layout(
+                
+            title_text=tt, title_font_family="Sitka Small",
+            title_font_color="red", title_x=0.5 , legend_title="Legend",
+            font=dict(
+                family="Courier New, monospace",
+                size=15,
+                color="RebeccaPurple" ))
+            
+            fig.update_layout(font_family="Sitka Small")
+            
+            # fig.update_layout(legend=dict(
+            # yanchor="top",
+            # y=-0,
+            # xanchor="left",
+            # x=1.01))
+            fig.update_xaxes(tickformat='%Y.%m.%d')
+            fig.update_layout(xaxis = go.layout.XAxis( tickangle = 45))
+            
+            
+            fig.update_layout(hovermode="x unified")
+            
+           
+            go.FigureWidget(fig.to_dict()).show()
+           
+            
+            if save_plot==True:
+            
+                if not os.path.exists(output_dir):
+                    os.mkdir(output_dir)
+
+                fig.write_html(output_dir + "/" + plot_filename + ".html" )
+                fig.write_image(output_dir + "/" + plot_filename + ".jpeg", scale=1, width=1080, height=300 )
+            
+            
+            
+     
     
    #######################################################################3
    
@@ -699,7 +808,17 @@ def akhdefo_ts_plot(path_to_shapefile=r"", dem_path=r"", point_size=1.0, opacity
             # add current item to the list
             dnames.append(x[:-18])
 
-
+    # import datetime
+    # import ipywidgets as widgets
+    # start_date = widgets.DatePicker(
+    #     description='Start Date',
+    #     disabled=False
+    # )
+    # end_date = widgets.DatePicker(
+    #     description='End Date',
+    #     disabled=False)
+    # widgets.HBox([start_date, end_date])
+    
     # Import shapfilepath
     shapefile_path = os.path.join(path_to_shapefile)
     basename = os.path.basename(shapefile_path[:-4])
@@ -806,7 +925,6 @@ def akhdefo_ts_plot(path_to_shapefile=r"", dem_path=r"", point_size=1.0, opacity
             cols = ['x', 'y']
             vals = [s1, s2]
             geo_df=gdf[np.logical_and.reduce([gdf[c] == v for c, v in zip(cols, vals)])]
-            
             df_filt1=geo_df[dnames]
             
             df_filt1.columns = df_filt1.columns.str.replace(r"D", "")
@@ -903,7 +1021,7 @@ def akhdefo_ts_plot(path_to_shapefile=r"", dem_path=r"", point_size=1.0, opacity
             
             plt.savefig(Fig_outputDir + "/" + basename + ".png" )
                 
-        
+        #os.unlink("temp.csv")
           
     
     cid = fig.canvas.mpl_connect('button_press_event', onclick)
@@ -916,11 +1034,11 @@ def akhdefo_ts_plot(path_to_shapefile=r"", dem_path=r"", point_size=1.0, opacity
     
     
     
-    plt.show()
+    plt.show() 
    
 
 def MeanProducts_plot_ts(path_to_shapefile="", dem_path="" , out_folder="Figs_analysis", color_field="", Set_fig_MinMax=False, MinMaxRange=[-100,100],
-                   opacity=0.5, cmap="jet" , point_size=1, cbar_label="mm/year"):
+                   opacity=0.5, cmap="jet" , point_size=1, cbar_label="mm/year" , batch_plot=False, dates_list="" ):
     
     """
     This program used to plot shapefile data
@@ -994,55 +1112,126 @@ def MeanProducts_plot_ts(path_to_shapefile="", dem_path="" , out_folder="Figs_an
     # Transforming the shapefile to the dem data crs
     gdf = gdf.to_crs(dem_crs)
     
+    if not os.path.exists(out_folder):
+        os.makedirs(out_folder)
     
-    min=gdf[color_field].min()
-    max=gdf[color_field].max()
-    import matplotlib.colors as mcolors
-    from matplotlib_scalebar.scalebar import ScaleBar
-    from mpl_toolkits.axes_grid1 import make_axes_locatable
+    if batch_plot==False:
+        min=gdf[color_field].min()
+        max=gdf[color_field].max()
+        import matplotlib.colors as mcolors
+        from matplotlib_scalebar.scalebar import ScaleBar
+        from mpl_toolkits.axes_grid1 import make_axes_locatable
+        
+        
+        if min < 0 and max >0 :
+            if Set_fig_MinMax==True:
+                min_n=MinMaxRange[0]
+                max_n=MinMaxRange[1]
+                min=min_n
+                max=max_n
+                offset = mcolors.TwoSlopeNorm(vmin=min,
+                            vcenter=0., vmax=max)  
+            else:
+                offset = mcolors.TwoSlopeNorm(vmin=min,
+                            vcenter=0., vmax=max)
+                
+        else  : 
+            if Set_fig_MinMax==True:
+                min_n=0
+                max_n=100
+                min=MinMaxRange[0]
+                max=MinMaxRange[1]
+                offset=mcolors.Normalize(vmin=min, vmax=max)
+            else:
+                offset=mcolors.Normalize(vmin=min, vmax=max)
+                
+        fig = plt.figure(figsize=(7,7))
+        ax1 = fig.add_subplot(111)
+        
+        divider = make_axes_locatable(ax1)
+        cax = divider.append_axes('bottom', size='5%', pad=0.05)
+        
+        #fig, ax1 = plt.subplots(ncols=1, nrows=1, figsize=(10,5))
+        ep.plot_bands( hillshade,cbar=False,title=color_field,extent=dem_plotting_extent,ax=ax1, scale=False)
+        img_main=ax1.scatter(gdf.x, gdf.y, c=gdf[color_field], alpha=opacity, s=point_size, picker=1, cmap=cmap, norm=offset)
+        scalebar = ScaleBar(1, "m", length_fraction=0.25, scale_loc="right",border_pad=1,pad=0.5, box_color='white', box_alpha=0.5, location='lower right')
+        ax1.add_artist(scalebar)
+        plt.grid(True)
+        #ax.scatter(gdf.x, gdf.y, s= 0.5, c=gdf.VEL_MEAN ,picker=1)
+        cb=fig.colorbar(img_main, ax=ax1, cax=cax, extend='both', orientation='horizontal')
+        cb.set_label(cbar_label, labelpad=2, x=0.5, rotation=0)
+        
+        
+        plt.savefig(out_folder+"/"+color_field+".png")
+        
+        plt.show()
     
-    
-    if min < 0 and max >0 :
-        if Set_fig_MinMax==True:
-            min_n=MinMaxRange[0]
-            max_n=MinMaxRange[1]
-            min=min_n
-            max=max_n
-            offset = mcolors.TwoSlopeNorm(vmin=min,
-                        vcenter=0., vmax=max)  
+    if batch_plot==True:
+        if dates_list=="":
+            print("provide list of dates in txt file(Names.txt file)")
         else:
-            offset = mcolors.TwoSlopeNorm(vmin=min,
-                        vcenter=0., vmax=max)
+            dnames=[]
+            with open(dates_list, 'r') as fp:
+                for line in fp:
+                    # remove linebreak from a current name
+                    # linebreak is the last character of each line
+                    x = "D" + line[:-1]
+                    # add current item to the list
+                    dnames.append(x[:-18])
             
-    else  : 
-        if Set_fig_MinMax==True:
-            min_n=0
-            max_n=100
-            min=MinMaxRange[0]
-            max=MinMaxRange[1]
-            offset=mcolors.Normalize(vmin=min, vmax=max)
-        else:
-            offset=mcolors.Normalize(vmin=min, vmax=max)
+            for nd in gdf[dnames]:
+                min=gdf[nd].min()
+                max=gdf[nd].max()
+                import matplotlib.colors as mcolors
+                from matplotlib_scalebar.scalebar import ScaleBar
+                from mpl_toolkits.axes_grid1 import make_axes_locatable
+                
+                
+                if min < 0 and max >0 :
+                    if Set_fig_MinMax==True:
+                        min_n=MinMaxRange[0]
+                        max_n=MinMaxRange[1]
+                        min=min_n
+                        max=max_n
+                        offset = mcolors.TwoSlopeNorm(vmin=min,
+                                    vcenter=0., vmax=max)  
+                    else:
+                        offset = mcolors.TwoSlopeNorm(vmin=min,
+                                    vcenter=0., vmax=max)
+                        
+                else  : 
+                    if Set_fig_MinMax==True:
+                        min_n=0
+                        max_n=100
+                        min=MinMaxRange[0]
+                        max=MinMaxRange[1]
+                        offset=mcolors.Normalize(vmin=min, vmax=max)
+                    else:
+                        offset=mcolors.Normalize(vmin=min, vmax=max)
+                fig = plt.figure(figsize=(7,7))
+                ax1 = fig.add_subplot(111)
+                
+                divider = make_axes_locatable(ax1)
+                cax = divider.append_axes('bottom', size='5%', pad=0.05)
+                
+                #fig, ax1 = plt.subplots(ncols=1, nrows=1, figsize=(10,5))
+                ep.plot_bands( hillshade,cbar=False,title=nd,extent=dem_plotting_extent,ax=ax1, scale=False)
+                img_main=ax1.scatter(gdf.x, gdf.y, c=gdf[nd], alpha=opacity, s=point_size, picker=1, cmap=cmap, norm=offset)
+                scalebar = ScaleBar(1, "m", length_fraction=0.25, scale_loc="right",border_pad=1,pad=0.5, box_color='white', box_alpha=0.5, location='lower right')
+                ax1.add_artist(scalebar)
+                plt.grid(True)
+                #ax.scatter(gdf.x, gdf.y, s= 0.5, c=gdf.VEL_MEAN ,picker=1)
+                cb=fig.colorbar(img_main, ax=ax1, cax=cax, extend='both', orientation='horizontal')
+                cb.set_label(cbar_label, labelpad=2, x=0.5, rotation=0)
+                
+                
+                plt.savefig(out_folder+"/"+nd+".png")
+                
+                if len(dnames)>10:
+                    print("akhdefo is plotting more than 10 figures to avoid crushing python kernel we skip displaying figures. \n Please see figures inside provided out_folder path")
+                else:
+                    
+                    plt.show()
+                
             
-    fig = plt.figure(figsize=(7,7))
-    ax1 = fig.add_subplot(111)
-    
-    divider = make_axes_locatable(ax1)
-    cax = divider.append_axes('bottom', size='5%', pad=0.05)
-    
-    #fig, ax1 = plt.subplots(ncols=1, nrows=1, figsize=(10,5))
-    ep.plot_bands( hillshade,cbar=False,title=color_field,extent=dem_plotting_extent,ax=ax1, scale=False)
-    img_main=ax1.scatter(gdf.x, gdf.y, c=gdf[color_field], alpha=opacity, s=point_size, picker=1, cmap=cmap, norm=offset)
-    scalebar = ScaleBar(1, "m", length_fraction=0.25, scale_loc="right",border_pad=1,pad=0.5, box_color='white', box_alpha=0.5, location='lower right')
-    ax1.add_artist(scalebar)
-    plt.grid(True)
-    #ax.scatter(gdf.x, gdf.y, s= 0.5, c=gdf.VEL_MEAN ,picker=1)
-    cb=fig.colorbar(img_main, ax=ax1, cax=cax, extend='both', orientation='horizontal')
-    cb.set_label(cbar_label, labelpad=2, x=0.5, rotation=0)
-    
-    
-    plt.savefig(out_folder+"/"+color_field+".png")
-    
-    plt.show()
-    
-    
+            
