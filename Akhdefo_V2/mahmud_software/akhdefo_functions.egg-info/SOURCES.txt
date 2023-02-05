@@ -16,5 +16,4 @@ akhdefo_functions.egg-info/PKG-INFO
 akhdefo_functions.egg-info/SOURCES.txt
 akhdefo_functions.egg-info/dependency_links.txt
 akhdefo_functions.egg-info/not-zip-safe
-akhdefo_functions.egg-info/requires.txt
 akhdefo_functions.egg-info/top_level.txt
