@@ -7,7 +7,6 @@ Welcome to akhdefo's documentation!
 ===================================
 
 .. toctree::
-   README.md
    api.rst
    
 	
