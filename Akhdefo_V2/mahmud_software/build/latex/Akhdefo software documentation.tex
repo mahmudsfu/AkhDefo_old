@@ -63,6 +63,175 @@
 \sphinxstepscope
 
 
+\chapter{Akhdefo:}
+\label{\detokenize{README:akhdefo}}\label{\detokenize{README::doc}}
+\sphinxAtStartPar
+Computer Vision for Slope Stability: Land Deformation Monitoring Using Optical Satellite Imagery
+
+
+\chapter{Background of Akh\sphinxhyphen{}Defo:}
+\label{\detokenize{README:background-of-akh-defo}}
+\sphinxAtStartPar
+AKh\sphinxhyphen{}Defo is combination of two different words 1) Akh in Kurdish language means land, earth or soil (origion of the word is from Kurdish badini dailect) 2) Defo is short of English word deformation.
+
+
+\chapter{Recommended Citation:}
+\label{\detokenize{README:recommended-citation}}
+\sphinxAtStartPar
+Muhammad M, Williams\sphinxhyphen{}Jones G, Stead D, Tortini R, Falorni G and Donati D (2022) Applications of ImageBased Computer Vision for Remote Surveillance of Slope Instability.Front. Earth Sci. 10:909078. doi: 10.3389/feart.2022.909078
+
+
+\chapter{Updates:}
+\label{\detokenize{README:updates}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Akhdefo version one is deprecated please use Akhdefo version 2.
+
+\item {} 
+\sphinxAtStartPar
+Akhdefo now can run on the cloud for real\sphinxhyphen{}time processing
+
+\item {} 
+\sphinxAtStartPar
+Akhdefo now consist of 12 Modules that performs end to end python\sphinxhyphen{}based GIS and Image Processing and Custumized Figure generation
+
+\end{itemize}
+
+
+\chapter{Usage:}
+\label{\detokenize{README:usage}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref,download,myst}{download anaconda environment file}
+
+\end{itemize}
+
+\sphinxAtStartPar
+Please visit the GITHUB homepage to download the file
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref,download,myst}{download python package requirement text}
+
+\end{itemize}
+
+\sphinxAtStartPar
+Please visit the GITHUB homepage to download the file
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Create new python Anaconda environment using the below command
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{conda} \PYG{n}{env} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{n}{f} \PYG{n}{akhdefov2}\PYG{o}{.}\PYG{n}{yml}
+
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Install required python packages using below command
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pip} \PYG{n}{install} \PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{n}{pip\PYGZus{}req}\PYG{o}{.}\PYG{n}{txt}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Now install Akhdefo using the below command
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pip} \PYG{n}{install} \PYG{n}{akhdefo}\PYG{o}{\PYGZhy{}}\PYG{n}{functions}
+\end{sphinxVerbatim}
+
+
+\chapter{User Guide}
+\label{\detokenize{README:user-guide}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Under construction will be released soon!
+
+\end{itemize}
+
+
+\chapter{Akhdefo Functions Summary}
+\label{\detokenize{README:akhdefo-functions-summary}}
+
+\section{Preprocessing functions to unzip and sort images}
+\label{\detokenize{README:preprocessing-functions-to-unzip-and-sort-images}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{copyImage\PYGZus{}Data}\PYG{p}{,} \PYG{n}{copyUDM2\PYGZus{}Mask\PYGZus{}Data} \PYG{p}{,} \PYG{n}{unzip}
+\end{sphinxVerbatim}
+
+
+\section{Import Module to mosaic and crop raster to Area of Interest using shapefile}
+\label{\detokenize{README:import-module-to-mosaic-and-crop-raster-to-area-of-interest-using-shapefile}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{Mosaic}\PYG{p}{,} \PYG{n}{Crop\PYGZus{}to\PYGZus{}AOI}
+\end{sphinxVerbatim}
+
+
+\section{Import Module to filter rasters}
+\label{\detokenize{README:import-module-to-filter-rasters}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{Filter\PYGZus{}PreProcess}
+\end{sphinxVerbatim}
+
+
+\section{Import Module to calculate triplet raster velocities}
+\label{\detokenize{README:import-module-to-calculate-triplet-raster-velocities}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+ \PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{DynamicChangeDetection}
+ 
+\end{sphinxVerbatim}
+
+
+\section{Import Modules for plotting}
+\label{\detokenize{README:import-modules-for-plotting}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{akhdefo\PYGZus{}viewer}
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{plot\PYGZus{}stackNetwork}
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{Akhdefo\PYGZus{}resample}
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{Akhdefo\PYGZus{}inversion}
+\end{sphinxVerbatim}
+
+
+\section{Import Module to process stacked triplet velocities and collect velocity candidate points}
+\label{\detokenize{README:import-module-to-process-stacked-triplet-velocities-and-collect-velocity-candidate-points}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import} \PYG{n}{stackprep}\PYG{l+s+s1}{\PYGZsq{}}
+\end{sphinxVerbatim}
+
+
+\section{Python module to coregister satallite images}
+\label{\detokenize{README:python-module-to-coregister-satallite-images}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions}  \PYG{k+kn}{import}  \PYG{n}{Coregistration}
+\end{sphinxVerbatim}
+
+
+\section{python module to process and calculate timestamp linear deformation rates}
+\label{\detokenize{README:python-module-to-process-and-calculate-timestamp-linear-deformation-rates}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import}  \PYG{n}{Time\PYGZus{}Series}
+\end{sphinxVerbatim}
+
+
+\section{python module to plot timeseries profile for selected points}
+\label{\detokenize{README:python-module-to-plot-timeseries-profile-for-selected-points}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from}  \PYG{n+nn}{akhdefo\PYGZus{}functions} \PYG{k+kn}{import}  \PYG{n}{akhdefo\PYGZus{}ts\PYGZus{}plot}
+
+\end{sphinxVerbatim}
+
+\sphinxstepscope
+
+
 \begin{savenotes}\sphinxattablestart
 \sphinxthistablewithglobalstyle
 \sphinxthistablewithnovlinesstyle

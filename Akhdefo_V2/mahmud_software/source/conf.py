@@ -109,7 +109,7 @@ release = '2023'
 extensions = ['sphinx.ext.duration',
    'sphinx.ext.doctest',
    'sphinx.ext.autodoc',
-   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx']
+   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx', 'myst_parser']
 
 
 autodoc_mock_imports = ["akhdefo_functions.unzip",
@@ -140,4 +140,9 @@ package_dir=['akhdefo_functions']
 
 html_theme = 'classic'
 html_static_path = ['_static']
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
