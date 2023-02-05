@@ -1,7 +1,6 @@
 .. autosummary::
    :toctree: generated
 
-   
    akhdefo_functions.unzip
    akhdefo_functions.copyImage_Data
    akhdefo_functions.copyUDM2_Mask_Data
@@ -21,3 +20,4 @@
    akhdefo_functions.utm_to_latlon
    akhdefo_functions.MeanProducts_plot_ts
    akhdefo_functions.Auto_Variogram
+   akhdefo_functions.binary_mask

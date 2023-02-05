@@ -98,7 +98,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../../mahmud_software/'))
 
-project = 'akhdefo'
+project = 'Akhdefo'
 copyright = '2023, Mahmud Mustafa Muhammad'
 author = 'Mahmud Mustafa Muhammad'
 release = '2023'
@@ -109,7 +109,7 @@ release = '2023'
 extensions = ['sphinx.ext.duration',
    'sphinx.ext.doctest',
    'sphinx.ext.autodoc',
-   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx',]
+   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx', 'myst_parser']
 
 
 autodoc_mock_imports = ["akhdefo_functions.unzip",
@@ -138,5 +138,7 @@ package_dir=['akhdefo_functions']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = 'classic'
 html_static_path = ['_static']
+
+source_suffix = ['.rst', '.md']
