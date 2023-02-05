@@ -27,9 +27,7 @@ include = [
 
 
 
-[tool.poetry.dependencies]
 
-myst-parser='0.18.1'
 
 
 
