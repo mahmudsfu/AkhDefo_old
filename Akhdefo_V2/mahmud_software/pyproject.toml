@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "akhdefo_functions"
-version = "2.2.38"
+version = "2.2.39"
 description = "Land Deformation Monitoring Using Optical Satellite Imagery"
 authors = ["Mahmud Mustafa Muhammad <mahmud.muhamm1@gmail.com>"]
 
@@ -27,7 +27,9 @@ include = [
 
 
 
+[tool.poetry.dependencies]
 
+myst-parser='0.18.1'
 
 
 

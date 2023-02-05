@@ -7,8 +7,10 @@ with open("README.md", "r") as fh:
 
 setup(
     name='akhdefo_functions',
-    version='2.2.38',    
+    version='2.2.39',    
     description='Land Deformation Monitoring Using Optical Satellite Imagery',
+    install_requires=['myst-parser>=0.18.1'],
+        
     url='https://github.com/mahmudsfu/AkhDefo',
     author='Mahmud Mustafa Muhammad',
     author_email='mahmud.muhamm1@gmail.com',
@@ -28,7 +30,9 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
 
-    ])
+    ], 
+
+    )
 
 
  
