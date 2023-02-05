@@ -3,16 +3,33 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to akhdefo's documentation!
+
+
+
+Introduction!
+===================================
+
+.. toctree::
+	
+   README.md
+   
+
+   
+ 
+Documentation!
+===================================
+.. toctree::
+
+   api.rst
+
+Tutorials and Examples!
 ===================================
 
 .. toctree::
 
-   README.md
-   api.rst
-   
-	
+   Tutorials.md
 
+   	
 Indices and tables
 ==================
 

@@ -1,11 +1,15 @@
 Metadata-Version: 2.1
 Name: akhdefo-functions
-Version: 2.2.39
+Version: 2.2.41
 Summary: Land Deformation Monitoring Using Optical Satellite Imagery
 Home-page: https://github.com/mahmudsfu/AkhDefo
 Author: Mahmud Mustafa Muhammad
-Author-email: mahmud.muhamm1@gmail.com
+Author-email: Mahmud Mustafa Muhammad <mahmud.muhamm1@gmail.com>
 License: Academic Free License (AFL)
+Project-URL: Homepage, https://github.com/mahmudsfu/AkhDefo
+Project-URL: Bug Tracker, https://github.com/mahmudsfu/AkhDefo/issues
+Project-URL: Documentation, https://akhdefo.readthedocs.io/en/latest/README.html
+Project-URL: repository, https://akhdefo.readthedocs.io/en/latest/
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Science/Research
 Classifier: License :: OSI Approved :: Academic Free License (AFL)
@@ -17,6 +21,7 @@ Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.7
 Description-Content-Type: text/markdown
 
 

@@ -1,15 +1,22 @@
-[tool.poetry]
-name = "akhdefo_functions"
-version = "2.2.39"
-description = "Land Deformation Monitoring Using Optical Satellite Imagery"
-authors = ["Mahmud Mustafa Muhammad <mahmud.muhamm1@gmail.com>"]
 
-license = "Academic Free License (AFL)"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+
+[project]
+name = "akhdefo_functions"
+version = "2.2.41"
+authors = [
+  { name="Mahmud Mustafa Muhammad", email="mahmud.muhamm1@gmail.com" },
+]
+description = "Land Deformation Monitoring Using Optical Satellite Imagery"
 readme = "README.md"
-homepage = "https://github.com/mahmudsfu/AkhDefo"
-repository  = "https://akhdefo.readthedocs.io/en/latest/"
+requires-python = ">=3.7"
+
 classifiers = [
-        'Development Status :: 3 - Alpha',
+    'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: Academic Free License (AFL)',  
         'Operating System :: Microsoft :: Windows :: Windows 10',
@@ -18,16 +25,13 @@ classifiers = [
         'Programming Language :: Python :: 3.7', "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
-
-    ]
-
-include = [
-    "LICENSE",
 ]
 
-
-
-
+[project.urls]
+"Homepage" = "https://github.com/mahmudsfu/AkhDefo"
+"Bug Tracker" = "https://github.com/mahmudsfu/AkhDefo/issues"
+"Documentation" = "https://akhdefo.readthedocs.io/en/latest/README.html"
+"repository" = "https://akhdefo.readthedocs.io/en/latest/"
 
 
 

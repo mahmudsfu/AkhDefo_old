@@ -109,7 +109,8 @@ release = '2023'
 extensions = ['sphinx.ext.duration',
    'sphinx.ext.doctest',
    'sphinx.ext.autodoc',
-   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx', 'myst_parser']
+   'sphinx.ext.autosummary', 'sphinx.ext.intersphinx', 'myst_parser',  "nbsphinx",
+    "sphinx_gallery.load_style",]
 
 
 autodoc_mock_imports = ["akhdefo_functions.unzip",
@@ -146,3 +147,6 @@ source_suffix = {
     '.md': 'markdown',
 }
 
+nb_custom_formats = {
+    ".md": ["jupytext.reads", {"fmt": "mystnb"}],
+}

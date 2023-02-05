@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='akhdefo_functions',
-    version='2.2.39',    
+    version='2.2.41',    
     description='Land Deformation Monitoring Using Optical Satellite Imagery',
     
     url='https://github.com/mahmudsfu/AkhDefo',
